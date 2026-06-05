@@ -101,6 +101,29 @@ const {
     }
     updateToggleIcon(document.documentElement.classList.contains('dark'));
 
+    // 3D Tilt effect on elements with data-tilt
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      const el = card as HTMLElement;
+      el.style.transition = 'transform 0.15s ease';
+      el.style.transformStyle = 'preserve-3d';
+      el.addEventListener('mousemove', (e: Event) => {
+        const event = e as MouseEvent;
+        const rect = el.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+        el.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        el.style.boxShadow = `${-rotateY}px ${rotateX}px 20px rgba(37,99,235,0.1)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        el.style.boxShadow = 'none';
+      });
+    });
+
     // Floating particles background
     (function initParticles() {
       const canvas = document.createElement('canvas');

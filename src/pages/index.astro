@@ -13,13 +13,19 @@ import { personal, education, stats, specializations, projects, organizations, c
         Bintang<span class="text-brand-blue">.</span>
       </a>
       <ul class="hidden md:flex gap-8 font-body text-sm dark:text-brand-text/60 text-light-text/70">
-        <li><a href="#about" class="hover:text-brand-blue transition-colors">About</a></li>
-        <li><a href="#skills" class="hover:text-brand-blue transition-colors">Skills</a></li>
-        <li><a href="#experience" class="hover:text-brand-blue transition-colors">Experience</a></li>
-        <li><a href="#projects" class="hover:text-brand-blue transition-colors">Projects</a></li>
-        <li><a href="#contact" class="hover:text-brand-blue transition-colors">Contact</a></li>
+        <li><a href="#about" class="nav-link hover:text-brand-blue transition-colors" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav-link hover:text-brand-blue transition-colors" data-section="skills">Skills</a></li>
+        <li><a href="#experience" class="nav-link hover:text-brand-blue transition-colors" data-section="experience">Experience</a></li>
+        <li><a href="#projects" class="nav-link hover:text-brand-blue transition-colors" data-section="projects">Projects</a></li>
+        <li><a href="#contact" class="nav-link hover:text-brand-blue transition-colors" data-section="contact">Contact</a></li>
       </ul>
       <div class="flex items-center gap-3">
+        <!-- Mobile hamburger -->
+        <button id="mobile-toggle" class="md:hidden p-2 dark:text-brand-text text-light-text" aria-label="Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
         <button id="theme-toggle" class="p-2 rounded-full hover:dark:bg-brand-surface hover:bg-light-border/50 transition-all" aria-label="Toggle theme">
           <svg id="icon-moon" class="w-4 h-4 dark:text-brand-text/60 text-light-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:block;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -30,7 +36,27 @@ import { personal, education, stats, specializations, projects, organizations, c
         </button>
       </div>
     </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-brand-border pt-4">
+      <ul class="flex flex-col gap-3 font-body text-sm dark:text-brand-text/70 text-light-text/70">
+        <li><a href="#about" class="block py-2 hover:text-brand-blue transition-colors mobile-link">About</a></li>
+        <li><a href="#skills" class="block py-2 hover:text-brand-blue transition-colors mobile-link">Skills</a></li>
+        <li><a href="#experience" class="block py-2 hover:text-brand-blue transition-colors mobile-link">Experience</a></li>
+        <li><a href="#projects" class="block py-2 hover:text-brand-blue transition-colors mobile-link">Projects</a></li>
+        <li><a href="#contact" class="block py-2 hover:text-brand-blue transition-colors mobile-link">Contact</a></li>
+      </ul>
+    </div>
   </nav>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-brand-blue to-brand-cyan z-[60] transition-none" style="width: 0%;"></div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-10 h-10 bg-brand-blue text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-blue/20 opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:bg-brand-cyan" aria-label="Back to top">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+    </svg>
+  </button>
 
   <!-- ══════════════ HERO ══════════════ -->
   <section class="relative min-h-screen flex items-center overflow-hidden">
@@ -73,7 +99,7 @@ import { personal, education, stats, specializations, projects, organizations, c
         </div>
 
         <!-- Right: Photo -->
-        <div class="relative">
+        <div class="relative mt-8" data-tilt>
           <img src="/Gambar/Foto.jpeg" alt="Bintang Maulana Magribi"
                class="w-full aspect-[3/2] object-cover photo-glow rounded-sm" />
           <div class="flex justify-between items-center mt-3 mx-1">
@@ -106,7 +132,7 @@ import { personal, education, stats, specializations, projects, organizations, c
           </h2>
           
           <!-- Education with ITB logo -->
-          <div class="border border-brand-border dark:bg-brand-surface/50 bg-light-surface p-6 relative overflow-hidden">
+          <div data-tilt class="border border-brand-border dark:bg-brand-surface/50 bg-light-surface p-6 relative overflow-hidden">
             <div class="absolute top-0 left-0 w-1 h-full bg-brand-blue"></div>
             <div class="flex items-start justify-between gap-4">
               <div>
@@ -236,7 +262,7 @@ import { personal, education, stats, specializations, projects, organizations, c
         {specializations.map((spec, i) => {
           const isEven = i % 2 === 0;
           return (
-            <div class="skill-card border border-brand-border dark:bg-brand-surface/30 bg-light-surface p-7 hover:border-brand-blue/50 overflow-hidden relative cursor-default">
+            <div data-tilt class="skill-card border border-brand-border dark:bg-brand-surface/30 bg-light-surface p-7 hover:border-brand-blue/50 overflow-hidden relative cursor-default">
               <div class="text-3xl mb-4">
                 {spec.icon === 'plane' ? '✈️' : spec.icon === 'globe' ? '🌐' : spec.icon === 'map' ? '🗺️' : '🌊'}
               </div>
@@ -274,7 +300,7 @@ import { personal, education, stats, specializations, projects, organizations, c
       <h2 data-reveal class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-12">Featured Projects</h2>
 
       <!-- Featured: Bali Catalyst -->
-      <div data-reveal class="grid lg:grid-cols-2 gap-10 items-center mb-16 border border-brand-border dark:bg-brand-surface/20 bg-light-surface p-8 hover:border-brand-blue/30 transition-all">
+      <div data-reveal data-tilt class="grid lg:grid-cols-2 gap-10 items-center mb-16 border border-brand-border dark:bg-brand-surface/20 bg-light-surface p-8 hover:border-brand-blue/30 transition-all">
         <div>
           <span class="font-mono text-[10px] text-brand-blue tracking-wider">01 — FEATURED</span>
           <h3 class="font-display font-bold text-2xl dark:text-brand-white text-light-heading mt-2 mb-3 leading-tight">
@@ -433,5 +459,67 @@ import { personal, education, stats, specializations, projects, organizations, c
     }
 
     setTimeout(typeChar, 500);
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = (anchor as HTMLAnchorElement).getAttribute('href') || '';
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Active nav link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('!text-brand-blue'));
+          const active = document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);
+          active?.classList.add('!text-brand-blue');
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+    sections.forEach(s => navObserver.observe(s));
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileToggle?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu?.classList.add('hidden'));
+    });
+
+    // Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      if (!progressBar) return;
+      const progress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      progressBar.style.width = progress + '%';
+    });
+
+    // Back to top button
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (!backToTop) return;
+      if (window.scrollY > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.transform = 'translateY(0)';
+        backToTop.style.pointerEvents = 'auto';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.transform = 'translateY(16px)';
+        backToTop.style.pointerEvents = 'none';
+      }
+    });
+    backToTop?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </Layout>

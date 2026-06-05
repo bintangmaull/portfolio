@@ -4,122 +4,120 @@ import { experience } from "../data/portfolio";
 import type { ExperienceItem } from "../data/portfolio";
 
 export default function ExperienceSection() {
-  const tabs = Object.entries(experience);
-  const [activeTab, setActiveTab] = useState(tabs[0][0]);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-  const activeItems = experience[activeTab]?.items || [];
+  const allCategories = Object.entries(experience);
+  const [selectedItem, setSelectedItem] = useState<{ key: string; index: number } | null>(null);
 
-  const toggle = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
+  // Get all items flat for the grid
+  const allItems: { item: ExperienceItem; key: string; index: number; categoryLabel: string }[] = [];
+  allCategories.forEach(([key, { label, items }]) => {
+    items.forEach((item, index) => {
+      allItems.push({ item, key, index, categoryLabel: label });
+    });
+  });
+
+  const selected = selectedItem
+    ? allItems.find(i => i.key === selectedItem.key && i.index === selectedItem.index)
+    : null;
 
   return (
-    <div>
-      {/* Tab Filter */}
-      <div className="flex gap-2 flex-wrap mb-10">
-        {tabs.map(([key, { label }]) => (
-          <button
-            key={key}
-            onClick={() => { setActiveTab(key); setExpandedId(null); }}
-            className={`font-mono text-xs px-4 py-2 border transition-all duration-200 ${
-              activeTab === key
-                ? "bg-[#2563EB] text-white border-[#2563EB]"
-                : "border-[#1E2D45] text-[#6B7280] hover:border-[#2563EB] hover:text-[#2563EB]"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
+    <div className="relative">
+      {/* Grid of cards */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        {allItems.map(({ item, key, index, categoryLabel }) => {
+          const id = `${key}-${index}`;
+          return (
+            <motion.div
+              key={id}
+              layoutId={id}
+              onClick={() => setSelectedItem({ key, index })}
+              className="cursor-pointer border border-[#1E2D45] bg-[#111827]/40 p-4 hover:border-[#2563EB]/50 transition-colors relative overflow-hidden group"
+              whileHover={{ scale: 1.04, zIndex: 10 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              {/* Hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2563EB] to-[#06B6D4] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              
+              <div className="relative z-10">
+                <div className="font-mono text-[9px] text-[#06B6D4] mb-1.5">{item.date}</div>
+                <div className="text-sm font-semibold text-[#F9FAFB] leading-tight mb-1" style={{ fontFamily: 'Sora, sans-serif' }}>
+                  {item.title}
+                </div>
+                <div className="text-[10px] text-[#6B7280]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  {item.company}
+                </div>
+                <div className="mt-2 font-mono text-[8px] text-[#2563EB]/60 uppercase tracking-wider">
+                  {categoryLabel}
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* Experience List — compact, expandable */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="space-y-2"
-        >
-          {activeItems.map((item: ExperienceItem, index: number) => {
-            const id = `${activeTab}-${index}`;
-            const isOpen = expandedId === id;
+      {/* Modal overlay when clicked */}
+      <AnimatePresence>
+        {selected && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedItem(null)}
+              className="fixed inset-0 bg-[#0A0E1A]/80 backdrop-blur-sm z-50"
+            />
 
-            return (
-              <motion.div
-                key={id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.04 }}
+            {/* Expanded card */}
+            <motion.div
+              layoutId={`${selected.key}-${selected.index}`}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90vw] max-w-lg border border-[#2563EB]/40 bg-[#111827] p-8 shadow-2xl shadow-[#2563EB]/10"
+              transition={{ type: "spring", stiffness: 250, damping: 25 }}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedItem(null)}
+                className="absolute top-4 right-4 text-[#6B7280] hover:text-white text-lg transition-colors"
               >
-                {/* Collapsed row — clickable */}
-                <button
-                  onClick={() => toggle(id)}
-                  className={`w-full text-left px-5 py-4 border transition-all duration-300 flex items-center gap-6 group ${
-                    isOpen 
-                      ? "border-[#2563EB]/40 bg-[#111827]/80" 
-                      : "border-[#1E2D45] hover:border-[#2563EB]/30 bg-transparent"
-                  }`}
-                >
-                  {/* Date */}
-                  <span className="font-mono text-[10px] text-[#06B6D4] w-24 shrink-0">
-                    {item.date}
-                  </span>
+                ✕
+              </button>
 
-                  {/* Role + Title + Company */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-[10px] text-[#2563EB] uppercase tracking-wider">
-                        {item.role}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-sm font-semibold text-[#F9FAFB] truncate" style={{ fontFamily: 'Sora, sans-serif' }}>
-                        {item.title}
-                      </span>
-                      <span className="text-[10px] text-[#6B7280]">·</span>
-                      <span className="text-xs text-[#6B7280] truncate" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                        {item.company}
-                      </span>
-                    </div>
-                  </div>
+              {/* Top accent */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2563EB] to-[#06B6D4]"></div>
 
-                  {/* Expand icon */}
-                  <span className={`text-[#6B7280] text-xs transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                    ▾
-                  </span>
-                </button>
+              <div className="font-mono text-[10px] text-[#06B6D4] mb-1">{selected.item.date}</div>
+              <div className="font-mono text-[9px] text-[#2563EB] uppercase tracking-wider mb-2">{selected.item.role}</div>
+              <h3 className="text-xl font-bold text-[#F9FAFB] mb-1" style={{ fontFamily: 'Sora, sans-serif' }}>
+                {selected.item.title}
+              </h3>
+              <p className="text-sm text-[#6B7280] mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                {selected.item.company}
+              </p>
+              <div className="font-mono text-[9px] text-[#6B7280] uppercase tracking-wider mb-2">
+                {selected.categoryLabel}
+              </div>
 
-                {/* Expanded details */}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 py-4 border-x border-b border-[#1E2D45] bg-[#111827]/50">
-                        <ul className="space-y-2">
-                          {item.highlights.map((h: string, i: number) => (
-                            <li key={i} className="flex gap-3 items-start">
-                              <span className="text-[#06B6D4] mt-0.5 font-mono text-xs">▸</span>
-                              <span className="text-sm text-[#E5E7EB] leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                                {h}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+              <div className="w-full h-px bg-[#1E2D45] my-4"></div>
+
+              <ul className="space-y-3">
+                {selected.item.highlights.map((h: string, i: number) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.1 }}
+                    className="flex gap-3 items-start"
+                  >
+                    <span className="text-[#06B6D4] font-mono text-xs mt-0.5">▸</span>
+                    <span className="text-sm text-[#E5E7EB] leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{h}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </>
+        )}
       </AnimatePresence>
     </div>
   );
