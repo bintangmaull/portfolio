@@ -144,54 +144,114 @@ const {
 
       interface Particle {
         x: number; y: number; vx: number; vy: number; size: number; opacity: number;
+        type: 'dot' | 'cross' | 'ring';
       }
 
       const particles: Particle[] = [];
-      const count = 80;
+      const count = 60;
+      const types: ('dot' | 'cross' | 'ring')[] = ['dot', 'dot', 'dot', 'cross', 'ring'];
 
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.4,
-          size: Math.random() * 2 + 0.5,
-          opacity: Math.random() * 0.5 + 0.15,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 2 + 1,
+          opacity: Math.random() * 0.4 + 0.1,
+          type: types[Math.floor(Math.random() * types.length)],
         });
       }
+
+      // Floating contour lines (geodesy element)
+      const contours: { y: number; speed: number; amplitude: number; phase: number; opacity: number }[] = [];
+      for (let i = 0; i < 5; i++) {
+        contours.push({
+          y: Math.random() * canvas.height,
+          speed: 0.1 + Math.random() * 0.2,
+          amplitude: 20 + Math.random() * 40,
+          phase: Math.random() * Math.PI * 2,
+          opacity: 0.03 + Math.random() * 0.04,
+        });
+      }
+
+      let frame = 0;
 
       function draw() {
         if (!ctx) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        frame++;
 
+        // Draw contour lines (moving slowly)
+        contours.forEach(c => {
+          c.phase += 0.003;
+          ctx.beginPath();
+          for (let x = 0; x < canvas.width; x += 4) {
+            const y = c.y + Math.sin((x * 0.008) + c.phase) * c.amplitude;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = `rgba(37, 99, 235, ${c.opacity})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        });
+
+        // Draw particles (geodesy-themed shapes)
         particles.forEach(p => {
           p.x += p.vx;
           p.y += p.vy;
-
-          // Wrap around
           if (p.x < 0) p.x = canvas.width;
           if (p.x > canvas.width) p.x = 0;
           if (p.y < 0) p.y = canvas.height;
           if (p.y > canvas.height) p.y = 0;
 
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(37, 99, 235, ${p.opacity})`;
-          ctx.fill();
+          ctx.save();
+          ctx.globalAlpha = p.opacity;
+
+          if (p.type === 'dot') {
+            // Standard point (like GCP)
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = '#2563EB';
+            ctx.fill();
+          } else if (p.type === 'cross') {
+            // Crosshair (like survey target)
+            ctx.strokeStyle = '#06B6D4';
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(p.x - p.size * 2, p.y);
+            ctx.lineTo(p.x + p.size * 2, p.y);
+            ctx.moveTo(p.x, p.y - p.size * 2);
+            ctx.lineTo(p.x, p.y + p.size * 2);
+            ctx.stroke();
+          } else if (p.type === 'ring') {
+            // Ring (like satellite orbit)
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+            ctx.strokeStyle = '#06B6D4';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 1, 0, Math.PI * 2);
+            ctx.fillStyle = '#06B6D4';
+            ctx.fill();
+          }
+
+          ctx.restore();
         });
 
-        // Draw connections between nearby particles
+        // Draw connections (like triangulation network)
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
+            if (dist < 140) {
               ctx.beginPath();
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(6, 182, 212, ${0.12 * (1 - dist / 150)})`;
-              ctx.lineWidth = 0.6;
+              ctx.strokeStyle = `rgba(6, 182, 212, ${0.08 * (1 - dist / 140)})`;
+              ctx.lineWidth = 0.4;
               ctx.stroke();
             }
           }
