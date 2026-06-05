@@ -1,0 +1,53 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  unit?: string;
+  accent: 'primary' | 'success' | 'alert';
+  icon: string;
+  delay?: number;
+}
+
+const { label, value, unit = "", accent, icon, delay = 0 } = Astro.props;
+
+const accentColors = {
+  primary: {
+    text: "text-[#00E5FF]",
+    border: "border-l-[#00E5FF]",
+    iconBg: "bg-[#00E5FF]/10",
+  },
+  success: {
+    text: "text-[#32D74B]",
+    border: "border-l-[#32D74B]",
+    iconBg: "bg-[#32D74B]/10",
+  },
+  alert: {
+    text: "text-[#FF453A]",
+    border: "border-l-[#FF453A]",
+    iconBg: "bg-[#FF453A]/10",
+  },
+};
+
+const colors = accentColors[accent];
+
+const iconMap: Record<string, string> = {
+  zap: "⚡",
+  "map-pin": "📍",
+  satellite: "🛰️",
+};
+---
+
+<div
+  class={`bg-[#1E1E1E] rounded-2xl p-6 border border-[#2C2C2E] border-l-4 ${colors.border} 
+          hover:bg-[#252525] transition-all duration-300 flex flex-col items-center text-center`}
+  data-aos="fade-up"
+  data-aos-delay={delay}
+>
+  <div class={`w-12 h-12 rounded-full ${colors.iconBg} flex items-center justify-center text-2xl mb-4`}>
+    {iconMap[icon] || "⚡"}
+  </div>
+  <div class={`font-mono text-4xl font-bold ${colors.text} mb-2`}>
+    {value}<span class="text-xl opacity-70">{unit}</span>
+  </div>
+  <div class="text-[#98989D] text-sm">{label}</div>
+</div>

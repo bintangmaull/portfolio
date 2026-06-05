@@ -1,0 +1,38 @@
+---
+import { personal, education } from "../data/portfolio";
+---
+
+<div class="relative overflow-hidden">
+  <!-- Background glow effect -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-3xl pointer-events-none"></div>
+  
+  <div class="relative text-center py-16 px-4">
+    <!-- Tagline -->
+    <p class="text-[#00E5FF] font-mono text-sm mb-6 tracking-wider opacity-80">
+      "{personal.tagline}"
+    </p>
+    
+    <!-- Name -->
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+      <span class="text-[#00E5FF]">Bintang</span> Maulana Magribi
+    </h1>
+    
+    <!-- Title -->
+    <p class="text-lg md:text-xl text-[#98989D] mb-8">
+      {personal.title}
+    </p>
+    
+    <!-- Meta badges -->
+    <div class="flex flex-wrap justify-center gap-3 text-sm">
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#1E1E1E] border border-[#2C2C2E] rounded-full text-[#98989D]">
+        <span>🎓</span> {education.institution} ({education.period})
+      </span>
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#1E1E1E] border border-[#2C2C2E] rounded-full text-[#98989D]">
+        <span>📊</span> GPA {education.gpa}
+      </span>
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#1E1E1E] border border-[#2C2C2E] rounded-full text-[#98989D]">
+        <span>📍</span> {personal.address}
+      </span>
+    </div>
+  </div>
+</div>

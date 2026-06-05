@@ -1,0 +1,106 @@
+---
+const navLinks = [
+  { id: "overview", label: "Overview" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#121212]/95 backdrop-blur-sm border-b border-[#2C2C2E]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Brand -->
+      <a href="#overview" class="flex items-center gap-2 group">
+        <span class="text-[#00E5FF] text-xl">⚡</span>
+        <span class="font-semibold text-white group-hover:text-[#00E5FF] transition-colors">
+          Bintang Maulana
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={`#${link.id}`}
+              class="nav-link px-4 py-2 text-sm text-[#98989D] hover:text-[#00E5FF] transition-colors rounded-lg"
+              data-section={link.id}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile Toggle -->
+      <button
+        id="nav-toggle"
+        class="md:hidden p-2 text-[#98989D] hover:text-white"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <ul class="flex flex-col gap-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={`#${link.id}`}
+              class="block px-4 py-2 text-sm text-[#98989D] hover:text-[#00E5FF] hover:bg-[#1E1E1E] rounded-lg transition-colors"
+              data-section={link.id}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu on link click
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+    });
+  });
+
+  // Active link highlighting on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('!text-[#00E5FF]');
+            link.classList.add('text-[#98989D]');
+          });
+          const activeLink = document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);
+          activeLink?.classList.add('!text-[#00E5FF]');
+          activeLink?.classList.remove('text-[#98989D]');
+        }
+      });
+    },
+    { threshold: 0.2, rootMargin: '-80px 0px 0px 0px' }
+  );
+
+  sections.forEach(section => observer.observe(section));
+</script>

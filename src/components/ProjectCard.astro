@@ -1,0 +1,76 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  techStack: string[];
+  liveUrl?: string;
+  category: string;
+  status: 'active' | 'completed' | 'archived';
+  year: string;
+  client?: string;
+  delay?: number;
+}
+
+const { title, description, techStack, liveUrl, category, status, year, client, delay = 0 } = Astro.props;
+
+const statusConfig = {
+  active: { text: "Active", class: "text-[#32D74B] border-[#32D74B]" },
+  completed: { text: "Completed", class: "text-[#00E5FF] border-[#00E5FF]" },
+  archived: { text: "Archived", class: "text-[#98989D] border-[#98989D]" },
+};
+
+const statusInfo = statusConfig[status];
+---
+
+<div
+  class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#2C2C2E] hover:bg-[#252525] hover:border-[#00E5FF]/30 transition-all duration-300 flex flex-col h-full"
+  data-aos="fade-up"
+  data-aos-delay={delay}
+>
+  <!-- Header -->
+  <div class="flex justify-between items-start mb-3">
+    <h3 class="font-semibold text-white text-lg leading-tight">{title}</h3>
+    <span class={`text-xs font-mono px-2 py-0.5 border rounded-full whitespace-nowrap ml-2 ${statusInfo.class}`}>
+      {statusInfo.text}
+    </span>
+  </div>
+
+  <!-- Category & Year -->
+  <div class="flex items-center gap-2 mb-3 text-xs text-[#98989D]">
+    <span class="font-mono text-[#00E5FF]">{year}</span>
+    <span>•</span>
+    <span>{category}</span>
+  </div>
+
+  <!-- Client -->
+  {client && (
+    <p class="text-xs text-[#98989D] mb-3 italic">
+      Client: {client}
+    </p>
+  )}
+
+  <!-- Description -->
+  <p class="text-sm text-[#98989D] mb-4 flex-grow leading-relaxed">{description}</p>
+
+  <!-- Tech Stack Tags -->
+  <div class="flex flex-wrap gap-2 mb-4">
+    {techStack.map((tech) => (
+      <span class="px-3 py-1 text-xs font-mono border border-[#00E5FF]/40 text-[#00E5FF] rounded-full">
+        {tech}
+      </span>
+    ))}
+  </div>
+
+  <!-- Links -->
+  {liveUrl && (
+    <a
+      href={liveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 text-sm text-[#00E5FF] hover:text-[#00E5FF]/80 transition-colors font-mono"
+    >
+      <span>🔗</span>
+      <span>Live Demo →</span>
+    </a>
+  )}
+</div>

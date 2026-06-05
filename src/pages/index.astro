@@ -1,0 +1,437 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ExperienceSection from "../components/ExperienceSection.tsx";
+import { personal, education, stats, specializations, projects, organizations, contact } from "../data/portfolio";
+---
+
+<Layout>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 px-8">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="#" class="font-display font-bold text-base dark:text-brand-white text-light-heading tracking-tight px-3 py-1.5 border border-brand-border rounded-sm">
+        Bintang<span class="text-brand-blue">.</span>
+      </a>
+      <ul class="hidden md:flex gap-8 font-body text-sm dark:text-brand-text/60 text-light-text/70">
+        <li><a href="#about" class="hover:text-brand-blue transition-colors">About</a></li>
+        <li><a href="#skills" class="hover:text-brand-blue transition-colors">Skills</a></li>
+        <li><a href="#experience" class="hover:text-brand-blue transition-colors">Experience</a></li>
+        <li><a href="#projects" class="hover:text-brand-blue transition-colors">Projects</a></li>
+        <li><a href="#contact" class="hover:text-brand-blue transition-colors">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button id="theme-toggle" class="p-2 rounded-full hover:dark:bg-brand-surface hover:bg-light-border/50 transition-all" aria-label="Toggle theme">
+          <svg id="icon-moon" class="w-4 h-4 dark:text-brand-text/60 text-light-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:block;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          <svg id="icon-sun" class="w-4 h-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:none;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Glow orbs -->
+    <div class="absolute top-10 right-10 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20"
+         style="background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-8 w-full py-24">
+      <div class="grid lg:grid-cols-[45%_1fr] gap-10 items-start">
+        
+        <!-- Left: Text -->
+        <div class="hero-stagger pt-8">
+          <!-- Simple label -->
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-8 h-px bg-brand-cyan"></span>
+            <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">GEODESY & GEOMATICS ENGINEER</span>
+          </div>
+
+          <!-- Name with typing animation -->
+          <h1 class="font-display font-black text-[clamp(2.2rem,5vw,4rem)] leading-[1] tracking-tight dark:text-brand-white text-light-heading mb-5">
+            <span id="typed-name"></span><span id="cursor" class="text-brand-blue">|</span>
+          </h1>
+
+          <!-- Bio -->
+          <p class="font-body text-sm dark:text-brand-text/60 text-light-text/70 max-w-sm mb-8 leading-[1.8]">
+            Geodesy and Geomatics Engineering graduate from ITB experienced in UAV surveying, GIS analysis, and WebGIS development. Proficient in spatial data processing tools (ArcGIS, QGIS, Agisoft, LiDAR) and programming (Python, PostGIS), combining strong technical expertise with excellent leadership and teamwork skills.
+          </p>
+
+          <!-- CTA -->
+          <div class="flex gap-4 flex-wrap">
+            <a href="#projects" class="group relative bg-brand-blue text-white font-mono text-xs px-7 py-3.5 tracking-wider overflow-hidden transition-all hover:shadow-[0_0_25px_rgba(37,99,235,0.3)]">
+              <span class="relative z-10">VIEW PROJECTS</span>
+              <div class="absolute inset-0 bg-brand-cyan translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+            </a>
+            <a href="#contact" class="border border-brand-border dark:text-brand-text/70 text-light-text font-mono text-xs px-7 py-3.5 tracking-wider hover:border-brand-blue hover:text-brand-blue transition-all">
+              CONTACT ME
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Photo -->
+        <div class="relative">
+          <img src="/Gambar/Foto.jpeg" alt="Bintang Maulana Magribi"
+               class="w-full aspect-[3/2] object-cover photo-glow rounded-sm" />
+          <div class="flex justify-between items-center mt-3 mx-1">
+            <span class="font-mono text-[10px] text-brand-cyan tracking-wider">ITB · 2025</span>
+            <span class="font-mono text-[10px] dark:text-brand-muted text-light-muted italic">"Be the star wherever you are."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <span class="font-mono text-[9px] dark:text-brand-muted/30 text-light-muted/50 tracking-[0.3em]">SCROLL</span>
+      <div class="w-px h-8 bg-gradient-to-b from-brand-blue/40 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ ABOUT ══════════════ -->
+  <section id="about" class="py-28 relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid lg:grid-cols-5 gap-16 items-start">
+        <div class="lg:col-span-3" data-reveal>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-8 h-px bg-brand-cyan"></span>
+            <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">ABOUT ME</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-6 leading-tight">
+            Mapping Indonesia,<br/><span class="text-brand-blue">one flight at a time.</span>
+          </h2>
+          
+          <!-- Education with ITB logo -->
+          <div class="border border-brand-border dark:bg-brand-surface/50 bg-light-surface p-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-brand-blue"></div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="font-mono text-[10px] text-brand-cyan tracking-[0.2em] mb-2">EDUCATION</div>
+                <div class="font-display font-semibold text-lg dark:text-brand-white text-light-heading">{education.institution}</div>
+                <div class="font-body text-sm dark:text-brand-text/60 text-light-text mt-1">{education.major}</div>
+                <div class="flex gap-6 mt-4">
+                  <div>
+                    <div class="font-mono text-xl font-bold dark:text-brand-white text-light-heading">{education.gpa}</div>
+                    <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted">GPA</div>
+                  </div>
+                  <div>
+                    <div class="font-mono text-xl font-bold dark:text-brand-white text-light-heading">{education.period}</div>
+                    <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted">PERIOD</div>
+                  </div>
+                </div>
+              </div>
+              <img src="/Gambar/logoitb.webp" alt="Logo ITB" class="w-16 h-16 object-contain shrink-0 opacity-80" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Organizations as Roadmap -->
+        <div class="lg:col-span-2" data-reveal>
+          <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted tracking-[0.2em] mb-8">ORGANIZATIONAL EXPERIENCE</div>
+          
+          <!-- Timeline roadmap with animation -->
+          <div class="relative pl-8">
+            <!-- Vertical line (animated grow) -->
+            <div class="absolute left-[9px] top-2 bottom-2 w-0.5 rounded-full overflow-hidden">
+              <div class="w-full h-full bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-blue/20 origin-top" 
+                   style="animation: growLine 1.5s ease-out 0.5s forwards; transform: scaleY(0);"></div>
+            </div>
+            
+            {organizations.map((org, i) => (
+              <div class="relative pb-10 last:pb-0" style={`animation: fadeSlideUp 0.6s ease ${0.8 + i * 0.3}s forwards; opacity: 0;`}>
+                <!-- Dot with ring -->
+                <div class="absolute left-[-23px] top-1">
+                  <div class={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${i === 0 ? 'border-brand-blue bg-brand-blue/20' : 'border-brand-cyan/50 dark:bg-brand-dark bg-light-bg'}`}>
+                    <div class={`w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-brand-blue' : 'bg-brand-cyan/50'}`}></div>
+                  </div>
+                </div>
+                <!-- Content card -->
+                <div class="ml-4 dark:bg-brand-surface/30 bg-light-surface border border-brand-border p-4 rounded-sm hover:border-brand-blue/30 transition-all">
+                  <div class="font-mono text-[10px] text-brand-cyan mb-1">{org.period}</div>
+                  <div class="font-display font-semibold text-sm dark:text-brand-white text-light-heading">{org.name}</div>
+                  <div class="font-body text-xs dark:text-brand-text/60 text-light-text mt-1">{org.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SKILLS ══════════════ -->
+  <section id="skills" class="py-28 relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-border to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-8">
+      <!-- Specializations -->
+      <div class="flex items-center gap-3 mb-4" data-reveal>
+        <span class="w-8 h-px bg-brand-cyan"></span>
+        <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">SPECIALIZATIONS</span>
+      </div>
+      <h2 data-reveal class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-12">Core Competencies</h2>
+
+      <!-- Proficiency: Software logos grid -->
+      <div data-reveal class="mb-20">
+        <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted tracking-[0.2em] mb-8">PROFICIENCY</div>
+        
+        <!-- Geodetic -->
+        <div class="mb-8">
+          <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-4">Geodetic</h3>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-3">
+            {['Agisoft Metashape', 'DJI Terra', 'Trimble BC', 'QGIS', 'ArcGIS', 'Global Mapper', 'Google Earth Engine', 'AutoCAD Civil3D'].map((sw) => (
+              <div class="flex flex-col items-center gap-2 p-3 border border-brand-border rounded-sm hover:border-brand-blue/40 transition-all group">
+                <div class="w-8 h-8 rounded bg-brand-surface/50 border border-brand-border flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted group-hover:border-brand-cyan/30 transition-colors">
+                  <span class="font-mono">{sw.slice(0,2).toUpperCase()}</span>
+                </div>
+                <span class="text-[9px] dark:text-brand-text/60 text-light-text text-center leading-tight">{sw}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- IT -->
+        <div class="mb-8">
+          <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-4">IT</h3>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+            {['Python', 'Flask', 'Next.js', 'PostgreSQL', 'PostGIS', 'Matlab'].map((sw) => (
+              <div class="flex flex-col items-center gap-2 p-3 border border-brand-border rounded-sm hover:border-brand-blue/40 transition-all group">
+                <div class="w-8 h-8 rounded bg-brand-surface/50 border border-brand-border flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted group-hover:border-brand-cyan/30 transition-colors">
+                  <span class="font-mono">{sw.slice(0,2).toUpperCase()}</span>
+                </div>
+                <span class="text-[9px] dark:text-brand-text/60 text-light-text text-center leading-tight">{sw}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Creative -->
+        <div class="mb-8">
+          <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-4">Creative</h3>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+            {['Adobe Premiere Pro', 'Canva', 'Adobe Illustrator'].map((sw) => (
+              <div class="flex flex-col items-center gap-2 p-3 border border-brand-border rounded-sm hover:border-brand-blue/40 transition-all group">
+                <div class="w-8 h-8 rounded bg-brand-surface/50 border border-brand-border flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted group-hover:border-brand-cyan/30 transition-colors">
+                  <span class="font-mono">{sw.slice(0,2).toUpperCase()}</span>
+                </div>
+                <span class="text-[9px] dark:text-brand-text/60 text-light-text text-center leading-tight">{sw}</span>
+              </div>
+            ))}
+            <!-- And Others -->
+            <div class="flex flex-col items-center gap-2 p-3 border border-brand-border/50 border-dashed rounded-sm">
+              <div class="w-8 h-8 rounded flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted">
+                <span class="font-mono">+</span>
+              </div>
+              <span class="text-[9px] dark:text-brand-muted text-light-muted text-center">And Others</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Specializations -->
+      <div data-reveal class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        {specializations.map((spec, i) => {
+          const isEven = i % 2 === 0;
+          return (
+            <div class="skill-card border border-brand-border dark:bg-brand-surface/30 bg-light-surface p-7 hover:border-brand-blue/50 overflow-hidden relative cursor-default">
+              <div class="text-3xl mb-4">
+                {spec.icon === 'plane' ? '✈️' : spec.icon === 'globe' ? '🌐' : spec.icon === 'map' ? '🗺️' : '🌊'}
+              </div>
+              <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-2">{spec.name}</h3>
+              <p class="font-body text-xs dark:text-brand-muted text-light-muted leading-relaxed">{spec.description}</p>
+            </div>
+          );
+        })}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ EXPERIENCE ══════════════ -->
+  <section id="experience" class="py-28 relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-border to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex items-center gap-3 mb-4" data-reveal>
+        <span class="w-8 h-px bg-brand-cyan"></span>
+        <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">FIELD EXPERIENCE</span>
+      </div>
+      <h2 data-reveal class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-12">Professional Experience</h2>
+      <ExperienceSection client:visible />
+    </div>
+  </section>
+
+  <!-- ══════════════ PROJECTS ══════════════ -->
+  <section id="projects" class="py-28 relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex items-center gap-3 mb-4" data-reveal>
+        <span class="w-8 h-px bg-brand-cyan"></span>
+        <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">DEVELOPMENT</span>
+      </div>
+      <h2 data-reveal class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-12">Featured Projects</h2>
+
+      <!-- Featured: Bali Catalyst -->
+      <div data-reveal class="grid lg:grid-cols-2 gap-10 items-center mb-16 border border-brand-border dark:bg-brand-surface/20 bg-light-surface p-8 hover:border-brand-blue/30 transition-all">
+        <div>
+          <span class="font-mono text-[10px] text-brand-blue tracking-wider">01 — FEATURED</span>
+          <h3 class="font-display font-bold text-2xl dark:text-brand-white text-light-heading mt-2 mb-3 leading-tight">
+            Bali Catalyst<br/><span class="text-brand-cyan">Multi-Hazard Analysis</span>
+          </h3>
+          <p class="font-body text-sm dark:text-brand-text/60 text-light-text leading-relaxed mb-4">
+            Platform WebGIS analisis risiko bencana multi-hazard untuk Provinsi Bali.
+            Kalkulasi AAL otomatis saat data diperbarui.
+          </p>
+          <div class="flex gap-2 flex-wrap mb-4">
+            {['Flask', 'Next.js', 'PostgreSQL'].map(t => (
+              <span class="font-mono text-[10px] dark:bg-brand-border/40 bg-light-border/60 dark:text-brand-muted text-light-muted px-2.5 py-1">{t}</span>
+            ))}
+          </div>
+          <a href="https://bali-catalyst.tech" target="_blank" rel="noopener noreferrer"
+             class="font-mono text-xs text-brand-cyan hover:text-brand-blue transition-colors">
+            bali-catalyst.tech →
+          </a>
+        </div>
+        <!-- Mockup -->
+        <div class="border border-brand-border rounded-lg overflow-hidden">
+          <div class="flex items-center gap-1.5 px-3 py-2 dark:bg-brand-dark/60 bg-gray-100 border-b border-brand-border">
+            <div class="w-2 h-2 rounded-full bg-red-400/50"></div>
+            <div class="w-2 h-2 rounded-full bg-yellow-400/50"></div>
+            <div class="w-2 h-2 rounded-full bg-green-400/50"></div>
+            <div class="ml-2 flex-1 dark:bg-brand-dark/80 bg-gray-200 rounded px-2 py-0.5 font-mono text-[9px] dark:text-brand-muted text-light-muted">bali-catalyst.tech</div>
+          </div>
+          <div class="aspect-video dark:bg-brand-dark bg-gray-50 flex items-center justify-center">
+            <div class="text-center">
+              <div class="font-display font-bold text-xl dark:text-brand-white text-light-heading">CATALYST</div>
+              <div class="font-mono text-[10px] text-brand-cyan mt-1">Multi-Hazard Risk · Bali Province</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other projects -->
+      <div data-reveal class="space-y-3">
+        {projects.filter(p => p.id !== 'bali-catalyst').map((project, i) => (
+          <div class="group border border-brand-border dark:bg-brand-surface/20 bg-light-surface p-5 hover:border-brand-blue/40 transition-all relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-0.5 h-full bg-brand-blue/0 group-hover:bg-brand-blue transition-all duration-300"></div>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pl-3">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="font-mono text-[10px] text-brand-cyan">{project.year}</span>
+                  <span class={`font-mono text-[9px] border px-1.5 py-0.5 ${project.status === 'active' ? 'border-brand-cyan/30 text-brand-cyan' : 'border-brand-blue/30 text-brand-blue'}`}>{project.status.toUpperCase()}</span>
+                </div>
+                <h3 class="font-display font-semibold dark:text-brand-white text-light-heading">{project.title}</h3>
+                <p class="font-body text-xs dark:text-brand-text/50 text-light-text mt-1">{project.description}</p>
+              </div>
+              <div class="flex gap-2 shrink-0">
+                {project.techStack.map(t => (
+                  <span class="font-mono text-[9px] dark:bg-brand-border/30 bg-light-border/50 dark:text-brand-muted text-light-muted px-2 py-0.5">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ CONTACT ══════════════ -->
+  <section id="contact" class="py-32 relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent"></div>
+    <!-- Subtle glow -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full opacity-10 pointer-events-none"
+         style="background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);"></div>
+
+    <div class="relative max-w-3xl mx-auto px-8 text-center" style="z-index:2;">
+      <div data-reveal class="flex items-center gap-3 justify-center mb-6">
+        <span class="w-6 h-px bg-brand-cyan"></span>
+        <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">READY TO COLLABORATE?</span>
+        <span class="w-6 h-px bg-brand-cyan"></span>
+      </div>
+
+      <h2 data-reveal class="font-display font-black text-[clamp(2.5rem,6vw,5rem)] dark:text-brand-white text-light-heading leading-[0.95] mb-12">
+        GET IN <span class="gradient-text">TOUCH</span>
+      </h2>
+
+      <!-- Big email CTA -->
+      <a href={`mailto:${contact.email}`} data-reveal
+         class="group block border border-brand-border dark:bg-brand-surface/30 bg-light-surface p-8 mb-6 hover:border-brand-blue/50 transition-all relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-brand-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+        <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted tracking-wider mb-2">EMAIL</div>
+        <div class="font-mono text-lg dark:text-brand-white text-light-heading group-hover:text-brand-cyan transition-colors">{contact.email}</div>
+        <div class="font-mono text-xs text-brand-blue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Click to send email →</div>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" data-reveal
+         class="group block border border-brand-border dark:bg-brand-surface/30 bg-light-surface p-6 hover:border-brand-blue/50 transition-all relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-brand-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+        <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted tracking-wider mb-2">LINKEDIN</div>
+        <div class="font-body text-sm dark:text-brand-white text-light-heading group-hover:text-brand-cyan transition-colors">linkedin.com/in/bintangmaulana</div>
+      </a>
+
+      <div data-reveal class="font-mono text-[10px] dark:text-brand-muted/30 text-light-muted/50 tracking-[0.2em] mt-10">
+        LAT -7.8888° · LON 110.3372°
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-brand-border/50">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <span class="font-mono text-[10px] dark:text-brand-muted/60 text-light-muted">© 2025 BINTANG MAULANA MAGRIBI</span>
+    </div>
+  </footer>
+
+  <!-- Navbar scroll + Name animation -->
+  <script>
+    // Navbar scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (!nav) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      if (window.scrollY > 80) {
+        nav.style.background = isDark ? 'rgba(10,14,26,0.95)' : 'rgba(248,250,252,0.95)';
+        nav.style.backdropFilter = 'blur(16px)';
+        nav.style.borderBottom = isDark ? '1px solid rgba(30,45,69,0.5)' : '1px solid rgba(226,232,240,0.8)';
+        nav.style.paddingTop = '10px';
+        nav.style.paddingBottom = '10px';
+      } else {
+        nav.style.background = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.borderBottom = 'none';
+        nav.style.paddingTop = '16px';
+        nav.style.paddingBottom = '16px';
+      }
+    });
+
+    // Hero name typing animation (types once, then shimmers)
+    const typed = document.getElementById('typed-name');
+    const cursor = document.getElementById('cursor');
+    const fullName = 'BINTANG MAULANA MAGRIBI';
+    let i = 0;
+
+    function typeChar() {
+      if (!typed) return;
+      if (i < fullName.length) {
+        typed.innerHTML = formatName(fullName.slice(0, i + 1));
+        i++;
+        setTimeout(typeChar, 80);
+      } else {
+        // Done typing — hide cursor, add shimmer
+        setTimeout(() => {
+          if (cursor) cursor.style.display = 'none';
+          if (typed) typed.classList.add('shimmer-text');
+        }, 500);
+      }
+    }
+
+    function formatName(text: string) {
+      return text.replace('MAULANA', '<span class="gradient-text">MAULANA</span>');
+    }
+
+    setTimeout(typeChar, 500);
+  </script>
+</Layout>

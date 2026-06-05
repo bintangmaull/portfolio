@@ -1,0 +1,55 @@
+---
+import { contact } from "../data/portfolio";
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <!-- Email -->
+  <a
+    href={`mailto:${contact.email}`}
+    class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#2C2C2E] hover:bg-[#252525] hover:border-[#00E5FF]/30 transition-all duration-300 flex items-center gap-4 group"
+    data-aos="fade-up"
+    data-aos-delay="0"
+  >
+    <div class="w-12 h-12 rounded-full bg-[#00E5FF]/10 flex items-center justify-center text-xl shrink-0 group-hover:bg-[#00E5FF]/20 transition-colors">
+      ✉️
+    </div>
+    <div class="min-w-0">
+      <p class="text-xs text-[#98989D]">Email</p>
+      <p class="text-sm text-white font-mono truncate">{contact.email}</p>
+    </div>
+  </a>
+
+  <!-- LinkedIn -->
+  <a
+    href={contact.linkedin}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#2C2C2E] hover:bg-[#252525] hover:border-[#00E5FF]/30 transition-all duration-300 flex items-center gap-4 group"
+    data-aos="fade-up"
+    data-aos-delay="100"
+  >
+    <div class="w-12 h-12 rounded-full bg-[#00E5FF]/10 flex items-center justify-center text-xl shrink-0 group-hover:bg-[#00E5FF]/20 transition-colors">
+      💼
+    </div>
+    <div class="min-w-0">
+      <p class="text-xs text-[#98989D]">LinkedIn</p>
+      <p class="text-sm text-white truncate">bintangmaulana</p>
+    </div>
+  </a>
+
+  <!-- Phone -->
+  <a
+    href={`tel:${contact.phone.replace(/\s/g, '')}`}
+    class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#2C2C2E] hover:bg-[#252525] hover:border-[#00E5FF]/30 transition-all duration-300 flex items-center gap-4 group"
+    data-aos="fade-up"
+    data-aos-delay="200"
+  >
+    <div class="w-12 h-12 rounded-full bg-[#00E5FF]/10 flex items-center justify-center text-xl shrink-0 group-hover:bg-[#00E5FF]/20 transition-colors">
+      📞
+    </div>
+    <div class="min-w-0">
+      <p class="text-xs text-[#98989D]">Phone</p>
+      <p class="text-sm text-white font-mono">{contact.phone}</p>
+    </div>
+  </a>
+</div>
