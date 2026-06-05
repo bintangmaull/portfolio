@@ -200,58 +200,98 @@ import { personal, education, stats, specializations, projects, organizations, c
       </div>
       <h2 data-reveal class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-12">Core Competencies</h2>
 
-      <!-- Proficiency: Software logos grid -->
+      <!-- Proficiency: Software logos - flowing marquee style -->
       <div data-reveal class="mb-20">
         <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted tracking-[0.2em] mb-8">PROFICIENCY</div>
         
-        <!-- Geodetic -->
-        <div class="mb-8">
-          <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-4">Geodetic</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-3">
-            {['Agisoft Metashape', 'DJI Terra', 'Trimble BC', 'QGIS', 'ArcGIS', 'Global Mapper', 'Google Earth Engine', 'AutoCAD Civil3D'].map((sw) => (
-              <div class="flex flex-col items-center gap-2 p-3 border border-brand-border rounded-sm hover:border-brand-blue/40 transition-all group">
-                <div class="w-8 h-8 rounded bg-brand-surface/50 border border-brand-border flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted group-hover:border-brand-cyan/30 transition-colors">
-                  <span class="font-mono">{sw.slice(0,2).toUpperCase()}</span>
-                </div>
-                <span class="text-[9px] dark:text-brand-text/60 text-light-text text-center leading-tight">{sw}</span>
-              </div>
-            ))}
+        <!-- Geodetic row -->
+        <div class="mb-6">
+          <h3 class="font-display font-semibold text-xs dark:text-brand-cyan text-brand-blue mb-3 uppercase tracking-wider">Geodetic</h3>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/AgisoftMetashape.png" alt="Agisoft" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Agisoft Metashape</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/djiterra.png" alt="DJI Terra" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">DJI Terra</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/trimblebusinesscenter.png" alt="Trimble" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Trimble BC</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/qgis.png" alt="QGIS" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">QGIS</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/arcgis.webp" alt="ArcGIS" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">ArcGIS</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/globalmapper.png" alt="Global Mapper" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Global Mapper</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/googleearthengine.png" alt="GEE" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Google Earth Engine</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/civil3d.svg" alt="Civil3D" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">AutoCAD Civil3D</span>
+            </div>
           </div>
         </div>
 
-        <!-- IT -->
-        <div class="mb-8">
-          <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-4">IT</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
-            {['Python', 'Flask', 'Next.js', 'PostgreSQL', 'PostGIS', 'Matlab'].map((sw) => (
-              <div class="flex flex-col items-center gap-2 p-3 border border-brand-border rounded-sm hover:border-brand-blue/40 transition-all group">
-                <div class="w-8 h-8 rounded bg-brand-surface/50 border border-brand-border flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted group-hover:border-brand-cyan/30 transition-colors">
-                  <span class="font-mono">{sw.slice(0,2).toUpperCase()}</span>
-                </div>
-                <span class="text-[9px] dark:text-brand-text/60 text-light-text text-center leading-tight">{sw}</span>
-              </div>
-            ))}
+        <!-- IT row -->
+        <div class="mb-6">
+          <h3 class="font-display font-semibold text-xs dark:text-brand-cyan text-brand-blue mb-3 uppercase tracking-wider">IT & Development</h3>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-cyan/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/python.png" alt="Python" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Python</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-cyan/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/flask.png" alt="Flask" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Flask</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-cyan/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/next.webp" alt="Next.js" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Next.js</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-cyan/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/postgresql.png" alt="PostgreSQL" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">PostgreSQL</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-cyan/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/postgis.png" alt="PostGIS" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">PostGIS</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-[#162035] bg-white/90 border border-brand-border rounded-full hover:border-brand-cyan/50 hover:scale-105 transition-all shadow-sm">
+              <img src="/Gambar/matlab.png" alt="Matlab" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Matlab</span>
+            </div>
           </div>
         </div>
 
-        <!-- Creative -->
-        <div class="mb-8">
-          <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-4">Creative</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
-            {['Adobe Premiere Pro', 'Canva', 'Adobe Illustrator'].map((sw) => (
-              <div class="flex flex-col items-center gap-2 p-3 border border-brand-border rounded-sm hover:border-brand-blue/40 transition-all group">
-                <div class="w-8 h-8 rounded bg-brand-surface/50 border border-brand-border flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted group-hover:border-brand-cyan/30 transition-colors">
-                  <span class="font-mono">{sw.slice(0,2).toUpperCase()}</span>
-                </div>
-                <span class="text-[9px] dark:text-brand-text/60 text-light-text text-center leading-tight">{sw}</span>
-              </div>
-            ))}
-            <!-- And Others -->
-            <div class="flex flex-col items-center gap-2 p-3 border border-brand-border/50 border-dashed rounded-sm">
-              <div class="w-8 h-8 rounded flex items-center justify-center text-[10px] dark:text-brand-muted text-light-muted">
-                <span class="font-mono">+</span>
-              </div>
-              <span class="text-[9px] dark:text-brand-muted text-light-muted text-center">And Others</span>
+        <!-- Creative row -->
+        <div class="mb-6">
+          <h3 class="font-display font-semibold text-xs dark:text-brand-cyan text-brand-blue mb-3 uppercase tracking-wider">Creative</h3>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-brand-surface/40 bg-light-surface border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all">
+              <img src="/Gambar/adobe premiere pro.webp" alt="Premiere Pro" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Premiere Pro</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-brand-surface/40 bg-light-surface border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all">
+              <img src="/Gambar/canva.webp" alt="Canva" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Canva</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 dark:bg-brand-surface/40 bg-light-surface border border-brand-border rounded-full hover:border-brand-blue/50 hover:scale-105 transition-all">
+              <img src="/Gambar/adobe illustrator.png" alt="Illustrator" class="w-10 h-10 object-contain" />
+              <span class="text-xs dark:text-brand-text/80 text-light-text font-medium">Illustrator</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3 border border-brand-border/40 border-dashed rounded-full dark:text-brand-muted text-light-muted">
+              <span class="text-xs">+ And Others</span>
             </div>
           </div>
         </div>
