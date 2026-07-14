@@ -4,27 +4,82 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonicalUrl?: string;
 }
 
 const {
-  title = "Bintang Maulana Magribi — Geodesy Engineer",
-  description = "Portfolio of Bintang Maulana Magribi — Geodesy & Geomatics Engineer, Drone Surveyor, WebGIS Developer."
+  title = "Bintang Maulana Magribi — Geodesy & Geomatics Engineer",
+  description = "Portfolio of Bintang Maulana Magribi — Geodesy & Geomatics Engineer, UAV Drone Surveyor, GIS & WebGIS Developer graduate from ITB.",
+  image = "/Gambar/Foto.jpeg",
+  canonicalUrl = Astro.url.href
 } = Astro.props;
+
+const personSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Bintang Maulana Magribi",
+  "alternateName": ["Bintang Maulana", "Bintang M. Magribi"],
+  "jobTitle": "Foreman GIS & Aerial Survey — Geodesy and Geomatics Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "PT. Ganda Alam Makmur"
+  },
+  "description": description,
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Institut Teknologi Bandung"
+  },
+  "knowsAbout": [
+    "Geodesy",
+    "Geomatics Engineering",
+    "Photogrammetry",
+    "LiDAR Processing",
+    "WebGIS",
+    "GIS Analysis",
+    "UAV Surveying",
+    "Hydrography"
+  ],
+  "sameAs": [
+    "https://linkedin.com/in/bintangmaulana/"
+  ]
+});
 ---
 
 <!doctype html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content="Bintang Maulana Magribi, Bintang Maulana, Geodesy Engineer, Geomatics Engineer, UAV Surveyor, WebGIS Developer, ITB, GIS Specialist, Drone Surveyor Indonesia, Photogrammetry, LiDAR" />
+  <meta name="author" content="Bintang Maulana Magribi" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:site_name" content="Bintang Maulana Magribi — Portfolio" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+
+  <!-- Schema.org Person JSON-LD -->
+  <script type="application/ld+json" set:html={personSchema} />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/Gambar/favicon.png" />
 
   <!-- Prevent flash: apply saved theme before render -->
   <script is:inline>

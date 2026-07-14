@@ -91,6 +91,18 @@ export interface ExperienceItem {
 }
 
 export const experience: Record<string, { label: string; items: ExperienceItem[] }> = {
+  current: {
+    label: "GIS & Aerial Survey",
+    items: [
+      {
+        title: "Foreman GIS & Aerial Survey",
+        role: "Foreman GIS & Aerial Survey",
+        company: "PT. Ganda Alam Makmur",
+        date: "Jun 2026 - Present",
+        highlights: [],
+      },
+    ],
+  },
   photogrammetry: {
     label: "Photogrammetry & LiDAR",
     items: [
