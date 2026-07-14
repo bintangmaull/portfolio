@@ -1,0 +1,218 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { productsData } from "../../data/products";
+
+export async function getStaticPaths() {
+  return productsData.map((item) => ({
+    params: { id: item.id },
+    props: { product: item },
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<Layout
+  title={`${product.title} — Product Article & Overview`}
+  description={product.description}
+  canonicalUrl={`https://bintangmaulana.my.id/product/${product.id}`}
+>
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 px-8 bg-[#0A0E1A]/80 backdrop-blur-md border-b border-[#1E2D45]">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="/" class="font-display font-bold text-base dark:text-brand-white text-light-heading tracking-tight px-3 py-1.5 border border-brand-border rounded-sm hover:border-brand-blue transition-colors">
+        Bintang<span class="text-brand-blue">.</span>
+      </a>
+      <ul class="hidden md:flex gap-8 font-body text-sm dark:text-brand-text/80 text-light-text/80">
+        <li><a href="/" class="hover:text-brand-blue transition-colors">Home</a></li>
+        <li><a href="/product" class="text-brand-blue font-semibold">Products & Services</a></li>
+        <li><a href="/#about" class="hover:text-brand-blue transition-colors">About</a></li>
+        <li><a href="/#contact" class="hover:text-brand-blue transition-colors">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <a
+          href="/product"
+          class="font-mono text-xs border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-4 py-2 transition-all duration-300"
+        >
+          ← CATALOG
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="relative pt-36 pb-12 px-8 border-b border-[#1E2D45]">
+    <div class="max-w-4xl mx-auto">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 font-mono text-xs text-[#06B6D4] mb-6">
+        <a href="/" class="hover:underline">HOME</a>
+        <span>/</span>
+        <a href="/product" class="hover:underline">PRODUCTS & SERVICES</a>
+        <span>/</span>
+        <span class="text-brand-blue uppercase">{product.title}</span>
+      </div>
+
+      <!-- Tier & Badge -->
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-xs text-[#06B6D4] tracking-widest uppercase font-bold">
+          {product.category}
+        </span>
+        <span class="text-gray-600">·</span>
+        <span
+          class={`font-mono text-xs px-3 py-1 font-bold ${
+            product.tier === "premium"
+              ? "bg-[#2563EB] text-white"
+              : "bg-emerald-600 text-white"
+          }`}
+        >
+          {product.badge}
+        </span>
+      </div>
+
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl dark:text-white text-gray-900 tracking-tight leading-tight mb-4">
+        {product.title}
+      </h1>
+      <p class="font-body text-lg font-semibold text-[#06B6D4] mb-6">
+        {product.tagline}
+      </p>
+      <p class="font-body text-base dark:text-gray-300 text-gray-700 leading-relaxed mb-8">
+        {product.description}
+      </p>
+
+      <!-- Tech Stack Pills -->
+      <!-- Tech Stack Pills -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {product.techStack.map((tech) => (
+          <span class="font-mono text-xs dark:bg-[#1E2D45]/60 bg-gray-100 dark:text-gray-200 text-gray-800 px-3 py-1.5 border border-[#1E2D45]">
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <!-- Action Buttons in Hero -->
+      {(product.downloadUrl || product.githubUrl) && (
+        <div class="flex flex-wrap gap-4 pt-4 border-t border-[#1E2D45]/60">
+          {product.downloadUrl && (
+            <a
+              href={product.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all shadow-lg shadow-emerald-600/20 flex items-center gap-2"
+            >
+              <span>📥 UNDUH APLIKASI (GOOGLE DRIVE)</span>
+              <span>↗</span>
+            </a>
+          )}
+          {product.githubUrl && (
+            <a
+              href={product.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs px-6 py-3.5 border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white font-bold transition-all flex items-center gap-2"
+            >
+              <span>⭐ REPOSITORY GITHUB</span>
+              <span>↗</span>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Full Article Content Sections -->
+  <section class="py-16 px-8">
+    <div class="max-w-4xl mx-auto space-y-12">
+      {product.articleSections.map((sec, index) => (
+        <div class="border border-[#1E2D45]/80 dark:bg-[#111827]/40 bg-white p-8 shadow-sm">
+          <h2 class="font-display font-bold text-2xl dark:text-white text-gray-900 mb-4 border-b border-[#1E2D45]/60 pb-3">
+            {sec.title}
+          </h2>
+
+          {sec.content && (
+            <p class="font-body text-base dark:text-gray-300 text-gray-700 leading-relaxed mb-6">
+              {sec.content}
+            </p>
+          )}
+
+          {sec.items && (
+            <div class="space-y-6">
+              {sec.items.map((item) => (
+                <div class="dark:bg-[#0A0E1A]/60 bg-gray-50/80 p-5 border-l-2 border-[#06B6D4]">
+                  <h3 class="font-display font-bold text-base dark:text-[#06B6D4] text-blue-700 mb-2">
+                    {item.subtitle}
+                  </h3>
+                  <p class="font-body text-sm dark:text-gray-300 text-gray-700 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom CTA Block -->
+  <section class="py-16 px-8 border-t border-[#1E2D45] dark:bg-[#111827]/30 bg-gray-50">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="font-display font-bold text-2xl dark:text-white text-gray-900 mb-1">
+          Tertarik dengan {product.title}?
+        </h3>
+        <p class="font-body text-sm dark:text-gray-400 text-gray-600">
+          {product.downloadUrl
+            ? "Unduh aplikasi secara gratis atau kunjungi repository GitHub untuk mempelajari source code."
+            : "Hubungi langsung untuk pertanyaan detail, spesifikasi, maupun konsultasi proyek."}
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        {product.downloadUrl ? (
+          <>
+            <a
+              href={product.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-lg shadow-emerald-600/25 transition-colors"
+            >
+              📥 UNDUH VIA GOOGLE DRIVE →
+            </a>
+            {product.githubUrl && (
+              <a
+                href={product.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs px-6 py-3.5 border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white font-semibold transition-colors"
+              >
+                ⭐ GITHUB REPO →
+              </a>
+            )}
+          </>
+        ) : (
+          <a
+            href={`https://wa.me/6282135839218?text=${encodeURIComponent(product.whatsappMessage)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-xs px-6 py-3.5 bg-[#2563EB] hover:bg-[#06B6D4] text-white font-semibold shadow-lg shadow-[#2563EB]/25 transition-colors"
+          >
+            HUBUNGI / KONSULTASI VIA WHATSAPP →
+          </a>
+        )}
+        <a
+          href="/product"
+          class="font-mono text-xs border border-[#1E2D45] dark:text-white text-gray-800 hover:border-[#06B6D4] px-6 py-3.5 transition-colors"
+        >
+          ← KEMBALI
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#1E2D45] py-8 px-8 dark:bg-[#0A0E1A] bg-white">
+    <div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-mono dark:text-gray-500 text-gray-600">
+      <div>© {new Date().getFullYear()} Bintang Maulana Magribi.</div>
+      <a href="/product" class="hover:text-[#06B6D4]">Back to Products Catalog</a>
+    </div>
+  </footer>
+</Layout>
