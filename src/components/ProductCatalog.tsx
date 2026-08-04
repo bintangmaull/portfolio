@@ -19,7 +19,7 @@ export default function ProductCatalog() {
       className="block no-underline h-full product-card-link"
     >
       <div
-        className={`product-card group cursor-pointer border p-7 flex flex-col justify-between h-full relative overflow-hidden ${isPremium
+        className={`product-card group cursor-pointer border p-6 flex flex-col justify-between h-full relative overflow-hidden ${isPremium
             ? "border-[#1E2D45] dark:bg-[#111827]/60 bg-white/90 hover:border-[#2563EB] hover:shadow-[0_10px_35px_rgba(37,99,235,0.15)]"
             : "border-[#06B6D4]/40 dark:bg-[#0A1628]/60 bg-cyan-50/50 hover:border-[#06B6D4] hover:shadow-[0_10px_35px_rgba(6,182,212,0.15)]"
           }`}
@@ -49,34 +49,21 @@ export default function ProductCatalog() {
           </div>
 
           {/* Title & Tagline */}
-          <h3 className="font-display font-bold text-2xl dark:text-white text-gray-900 group-hover:text-[#06B6D4] transition-colors mb-2 leading-tight">
+          <h3 className="font-display font-bold text-xl dark:text-white text-gray-900 group-hover:text-[#06B6D4] transition-colors mb-2 leading-tight">
             {item.title}
           </h3>
-          <p className="font-body text-xs font-semibold text-[#06B6D4] mb-3">
+          <p className="font-body text-sm dark:text-gray-400 text-gray-600 mb-4 leading-relaxed line-clamp-2">
             {item.tagline}
           </p>
-          <p className="font-body text-sm dark:text-gray-300 text-gray-700 mb-6 leading-relaxed">
-            {item.description}
-          </p>
-
-          {/* Quick Highlights / Features preview */}
-          <ul className="space-y-2 mb-6">
-            {item.features.slice(0, 2).map((feat, i) => (
-              <li key={i} className="flex gap-2.5 items-start font-body text-xs dark:text-gray-300 text-gray-700">
-                <span className="text-[#06B6D4] font-mono mt-0.5">✓</span>
-                <span>{feat}</span>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div>
           {/* Tech stack pills */}
-          <div className="flex flex-wrap gap-1.5 mb-6">
+          <div className="flex flex-wrap gap-1.5 mb-5">
             {item.techStack.map((tech) => (
               <span
                 key={tech}
-                className="font-mono text-[10px] dark:bg-[#1E2D45]/50 bg-gray-100 dark:text-gray-300 text-gray-800 px-2.5 py-1 border border-[#1E2D45]/40"
+                className="font-mono text-[10px] dark:bg-[#1E2D45]/50 bg-gray-100 dark:text-gray-300 text-gray-800 px-2 py-0.5 border border-[#1E2D45]/40"
               >
                 {tech}
               </span>

@@ -17,6 +17,7 @@ export interface ProductItem {
   demoUrl?: string;
   downloadUrl?: string;
   githubUrl?: string;
+  imageUrl?: string;
   whatsappMessage: string;
   articleSections: ArticleSection[];
 }
@@ -237,6 +238,75 @@ export const productsData: ProductItem[] = [
               "Vanilla CSS3 & HSL Design System bergaya Glassmorphism dengan transisi halus dan dukungan Dark Theme profesional.",
           },
         ],
+      },
+    ],
+  },
+  {
+    id: "geotag-photo-app",
+    title: "Geotagging Photo App",
+    tagline: "Menyisipkan atau Memperbaiki Data Lokasi (GPS) pada Foto",
+    description:
+      "Aplikasi desktop ringan berbasis Python (Tkinter) yang dirancang khusus untuk memudahkan Anda menyisipkan atau memperbaiki data lokasi (GPS) pada foto Anda secara offline.",
+    tier: "free",
+    category: "Desktop Utility",
+    badge: "100% FREE / OPEN-SOURCE",
+    features: [
+      "Menambahkan koordinat lokasi baru ke metadata EXIF foto yang polos",
+      "Memperbaiki EXIF data GPS bawaan perangkat yang tidak terbaca",
+      "Dukungan fitur Drag & Drop file gambar untuk alur kerja yang cepat",
+      "Mendukung dua format koordinat: Desimal dan DMS (Derajat-Menit-Detik)"
+    ],
+    techStack: ["Python", "Tkinter", "Pillow", "piexif", "tkinterdnd2"],
+    downloadUrl: "https://drive.google.com/drive/folders/11gNNivjVzuEKbEP4LT0pEtCKjGuAL4w5?usp=sharing",
+    githubUrl: "https://github.com/bintangmaull/geotagging_photo",
+    imageUrl: "/Gambar/Tools/geotag photo app.png",
+    whatsappMessage:
+      "Halo Bintang, saya ingin menanyakan tentang aplikasi Geotagging Photo App.",
+    articleSections: [
+      {
+        title: "🚀 Fitur Utama",
+        items: [
+          {
+            subtitle: "Menambahkan Data GPS Baru",
+            description:
+              "Menambahkan titik koordinat lokasi (Latitude & Longitude) ke metadata EXIF pada foto yang masih polos atau belum memiliki geotag.",
+          },
+          {
+            subtitle: "Memperbaiki Geotag yang Tidak Terbaca",
+            description:
+              "Seringkali, foto dengan data lokasi bawaan dari perangkat gagal terbaca atau tidak terdeteksi saat diunggah ke website, sistem absensi, atau pelaporan tertentu. Aplikasi ini membuat ulang EXIF data GPS yang bersih agar terbaca dengan sempurna.",
+          },
+          {
+            subtitle: "Dukungan Drag & Drop",
+            description:
+              "Anda dapat langsung menarik file gambar (JPG/JPEG) dan menjatuhkannya (drag-and-drop) ke area pratinjau aplikasi untuk mempercepat alur kerja.",
+          },
+          {
+            subtitle: "Dua Format Koordinat",
+            description:
+              "Mendukung input lokasi dalam dua format standar: Desimal (contoh: -6.2088, 106.8456) dan DMS / Derajat-Menit-Detik (contoh: 6° 12' 31.68\" S, 106° 50' 44.16\" E).",
+          },
+          {
+            subtitle: "Opsi Kompresi Ringan",
+            description:
+              "Menyediakan fitur opsional untuk mengompres sedikit ukuran file foto setelah disimpan tanpa mengurangi kualitas secara drastis, sehingga lebih hemat ruang penyimpanan.",
+          },
+        ],
+      },
+      {
+        title: "⚙️ Cara Penggunaan",
+        content:
+          "1. Buka/jalankan aplikasi Geotagging Photo App.\n2. Tarik foto berekstensi .jpg atau .jpeg Anda ke area kotak pratinjau, atau klik tombol \"Pilih Foto\".\n3. Jika foto sebelumnya sudah memiliki data lokasi, kolom Latitude dan Longitude akan otomatis terisi.\n4. Pilih format koordinat yang ingin Anda gunakan di bagian pengaturan (Desimal atau DMS).\n5. Masukkan atau ubah koordinat latitude dan longitude sesuai kebutuhan.\n6. Centang opsi Gunakan Kompresi Ringan (opsional) jika ingin mengurangi file size.\n7. Klik Simpan Geotag.\n8. Aplikasi akan membuat salinan foto baru pada direktori yang sama dengan tambahan nama _geotagged (contoh: foto_geotagged.jpg). File asli Anda tetap aman dan tidak ditimpa!",
+      },
+      {
+        title: "🛠️ Persyaratan Instalasi (Bagi Developer)",
+        content:
+          "Jika Anda ingin menjalankan script secara langsung atau memodifikasi source code-nya, pastikan Anda telah memiliki Python 3.x dan menginstal dependensi (pip install -r requirements.txt). Modul utama yang digunakan antara lain: Pillow, piexif, dan tkinterdnd2.",
+      },
+      {
+        title: "🤝 Kontribusi",
+        content:
+          "Proyek ini sepenuhnya Gratis dan Open-Source. Jika Anda ingin berkontribusi menambahkan fitur baru (seperti integrasi API Maps, bulk process, dsb.), memperbaiki bug, atau melakukan refactoring, silakan Fork repository ini dan kirimkan Pull Request.",
       },
     ],
   },
