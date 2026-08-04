@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { productsData } from "../data/products";
 import type { ProductItem } from "../data/products";
 
 export default function ProductCatalog() {
-  const [activeModalItem, setActiveModalItem] = useState<ProductItem | null>(null);
-
   const premiumProducts = productsData.filter((item) => item.tier === "premium");
   const freeProducts = productsData.filter((item) => item.tier === "free");
 
@@ -19,13 +16,10 @@ export default function ProductCatalog() {
     <a
       key={item.id}
       href={`/product/${item.id}`}
-      className="block no-underline h-full"
+      className="block no-underline h-full product-card-link"
     >
-      <motion.div
-        whileHover={{ scale: 1.02, zIndex: 10 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className={`group cursor-pointer border p-7 flex flex-col justify-between h-full relative overflow-hidden transition-all duration-300 ${isPremium
+      <div
+        className={`product-card group cursor-pointer border p-7 flex flex-col justify-between h-full relative overflow-hidden ${isPremium
             ? "border-[#1E2D45] dark:bg-[#111827]/60 bg-white/90 hover:border-[#2563EB] hover:shadow-[0_10px_35px_rgba(37,99,235,0.15)]"
             : "border-[#06B6D4]/40 dark:bg-[#0A1628]/60 bg-cyan-50/50 hover:border-[#06B6D4] hover:shadow-[0_10px_35px_rgba(6,182,212,0.15)]"
           }`}
@@ -113,7 +107,7 @@ export default function ProductCatalog() {
             </button>
           </div>
         </div>
-      </motion.div>
+      </div>
     </a>
   );
 
@@ -160,116 +154,6 @@ export default function ProductCatalog() {
           {freeProducts.map((item, idx) => renderProductCard(item, idx, false))}
         </div>
       </div>
-
-      {/* Modal Detail Overlay */}
-      <AnimatePresence>
-        {activeModalItem && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActiveModalItem(null)}
-              className="fixed inset-0 bg-[#0A0E1A]/85 backdrop-blur-md z-50"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[92vw] max-w-2xl max-h-[85vh] overflow-y-auto border border-[#2563EB]/50 bg-[#111827] p-8 shadow-2xl"
-            >
-              <button
-                onClick={() => setActiveModalItem(null)}
-                className="absolute top-5 right-5 text-gray-400 hover:text-white text-xl transition-colors"
-              >
-                ✕
-              </button>
-
-              <div className="flex items-center gap-2 mb-2">
-                <span className="font-mono text-[10px] text-[#06B6D4] tracking-widest uppercase">
-                  {activeModalItem.category}
-                </span>
-                <span>·</span>
-                <span
-                  className={`font-mono text-[10px] uppercase font-bold px-2 py-0.5 ${activeModalItem.tier === "premium"
-                      ? "bg-[#2563EB] text-white"
-                      : "bg-emerald-600 text-white"
-                    }`}
-                >
-                  {activeModalItem.badge}
-                </span>
-              </div>
-
-              <h2 className="font-display font-bold text-3xl dark:text-white text-gray-900 mb-2">
-                {activeModalItem.title}
-              </h2>
-              <p className="font-body text-sm font-semibold text-[#06B6D4] mb-4">
-                {activeModalItem.tagline}
-              </p>
-
-              <div className="w-full h-px bg-[#1E2D45] my-4" />
-
-              <p className="font-body text-sm dark:text-gray-300 text-gray-700 leading-relaxed mb-6">
-                {activeModalItem.description}
-              </p>
-
-              {/* All Features */}
-              <div className="mb-6">
-                <div className="font-mono text-[10px] text-[#06B6D4] uppercase tracking-wider mb-3">
-                  FITUR UNGGULAN & SPESIFIKASI
-                </div>
-                <ul className="space-y-2.5">
-                  {activeModalItem.features.map((feature, i) => (
-                    <li key={i} className="flex gap-3 items-start font-body text-sm dark:text-gray-200 text-gray-800">
-                      <span className="text-[#06B6D4] font-mono mt-0.5">▸</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Tech Stack */}
-              <div className="mb-8">
-                <div className="font-mono text-[10px] text-[#06B6D4] uppercase tracking-wider mb-3">
-                  TEKNOLOGI YANG DIGUNAKAN
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {activeModalItem.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="font-mono text-xs dark:bg-[#1E2D45]/50 bg-gray-100 dark:text-gray-200 text-gray-800 px-3 py-1.5 border border-[#1E2D45]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="w-full h-px bg-[#1E2D45] my-6" />
-
-              <div className="flex flex-wrap gap-4 justify-between items-center">
-                <a
-                  href={`/product/${activeModalItem.id}`}
-                  className="font-mono text-xs border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white px-5 py-3 transition-colors font-semibold"
-                >
-                  📖 BACA ARTIKEL & DOKUMENTASI LENGKAP →
-                </a>
-                <button
-                  onClick={(e) => openWhatsApp(e, activeModalItem.whatsappMessage)}
-                  className={`font-mono text-xs px-6 py-3 transition-colors font-semibold flex items-center gap-2 shadow-lg ${activeModalItem.tier === "premium"
-                      ? "bg-[#2563EB] hover:bg-[#06B6D4] text-white shadow-[#2563EB]/25"
-                      : "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/25"
-                    }`}
-                >
-                  <span>{activeModalItem.tier === "premium" ? "HUBUNGI / KONSULTASI VIA WHATSAPP" : "MINTA LINK UNDUH VIA WHATSAPP"}</span>
-                  <span>→</span>
-                </button>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
