@@ -155,52 +155,52 @@ export const productsData: ProductItem[] = [
       "Halo Bintang, saya ingin menanyakan tautan unduhan / file aplikasi PDF Editor Pro Offline yang gratis.",
     articleSections: [
       {
-        title: "✨ Mengapa PDF Editor Pro?",
+        title: "Mengapa PDF Editor Pro?",
         content:
           "Sebagian besar alat PDF saat ini mengharuskan Anda mengunggah dokumen penting ke server cloud eksternal atau membayar langganan bulanan. PDF Editor Pro dirancang untuk memberi Anda kendali penuh atas dokumen sensitif Anda dengan privasi 100% lokal & offline, pemrosesan super cepat tanpa batas ukuran file, serta portabilitas tinggi.",
       },
       {
-        title: "🌟 6 Fitur Unggulan (All-in-One Studio Suite)",
+        title: "6 Fitur Unggulan (All-in-One Studio Suite)",
         items: [
           {
-            subtitle: "1. ✏️ Edit PDF & Tanda Tangan (Interactive Editor)",
+            subtitle: "1. Edit PDF & Tanda Tangan (Interactive Editor)",
             description:
               "Tanda Tangan Digital Multi-Mode: Draw (lukis tangan dengan 4 warna tinta resmi), Type (4 font kaligrafi sambung elegan: Great Vibes, Pacifico, Caveat, Dancing Script), dan Upload (unggah gambar stempel PNG transparan). Dilengkapi anotasi teks bebas, stempel bisnis kilat (DISETUJUI, LUNAS, RAHASIA, SEMENTARA), cap tanggal 1-klik, serta rotasi/hapus halaman.",
           },
           {
-            subtitle: "2. 📑 Gabungkan PDF (Merge PDF)",
+            subtitle: "2. Gabungkan PDF (Merge PDF)",
             description:
               "Satukan beberapa file dokumen PDF terpisah menjadi 1 file utuh secara runtut dengan dukungan drag-and-drop dan kontrol geser urutan sebelum penggabungan.",
           },
           {
-            subtitle: "3. ✂️ Hapus & Atur Halaman (Remove Pages)",
+            subtitle: "3. Hapus & Atur Halaman (Remove Pages)",
             description:
               "Tampilkan grid thumbnail interaktif dari seluruh halaman dokumen PDF Anda. Pilih halaman yang ingin dibuang (halaman kosong, iklan, atau sampul) dan simpan PDF bersihnya seketika.",
           },
           {
-            subtitle: "4. 🗜️ Kompres PDF (Compress PDF)",
+            subtitle: "4. Kompres PDF (Compress PDF)",
             description:
               "Kurangi ukuran file dokumen PDF agar hemat ruang simpan dan mudah dikirim. 3 Tingkat Pilihan: Ringan (kualitas ketajaman maksimal), Optimal (disarankan), dan Ekstra (kompresi maksimal).",
           },
           {
-            subtitle: "5. 🖼️ PDF ke Gambar (PDF to PNG / JPG)",
+            subtitle: "5. PDF ke Gambar (PDF to PNG / JPG)",
             description:
               "Ekstrak seluruh halaman dari dokumen PDF menjadi file gambar beresolusi tinggi yang otomatis dikemas dalam arsip ZIP jika dokumen memiliki banyak halaman.",
           },
           {
-            subtitle: "6. 📄 Gambar ke PDF (Image to PDF)",
+            subtitle: "6. Gambar ke PDF (Image to PDF)",
             description:
               "Ubah foto dokumen, KTP, atau gambar apapun (JPG, PNG, WebP) menjadi satu dokumen PDF standar profesional. Mendukung penggabungan banyak foto sekaligus dalam 1 album.",
           },
         ],
       },
       {
-        title: "🏗️ Struktur Arsitektur Kode Modular",
+        title: "Struktur Arsitektur Kode Modular",
         content:
           "Dibangun dengan arsitektur Clean Code Modular yang memisahkan antarmuka (index.html), penataan gaya (modul css/ terpisah untuk layout, components, editor, tools, dan modals), logika pemrosesan (modul js/ terpisah untuk editor, merge, pages, compress, dan converter), serta konfigurasi Electron executable.",
       },
       {
-        title: "🚀 Cara Menjalankan Aplikasi di Windows",
+        title: "Cara Menjalankan Aplikasi di Windows",
         items: [
           {
             subtitle: "Cara 1: Silent Launcher Desktop (Sangat Disarankan)",
@@ -220,12 +220,12 @@ export const productsData: ProductItem[] = [
         ],
       },
       {
-        title: "💾 Dialog Penyimpanan Modern (Save As)",
+        title: "Dialog Penyimpanan Modern (Save As)",
         content:
           "Seluruh fitur ekspor pada aplikasi ini terintegrasi dengan Modern File System Access API (showSaveFilePicker). Setiap kali menyimpan dokumen, jendela standar Windows Save As akan otomatis muncul sehingga Anda bebas memilih folder penyimpanan dan nama file baru.",
       },
       {
-        title: "🛠️ Teknologi & Library Internal",
+        title: "Teknologi & Library Internal",
         items: [
           {
             subtitle: "Engine & Core Processing",
@@ -264,7 +264,7 @@ export const productsData: ProductItem[] = [
       "Halo Bintang, saya ingin menanyakan tentang aplikasi Geotagging Photo App.",
     articleSections: [
       {
-        title: "🚀 Fitur Utama",
+        title: "Fitur Utama",
         items: [
           {
             subtitle: "Menambahkan Data GPS Baru",
@@ -294,17 +294,17 @@ export const productsData: ProductItem[] = [
         ],
       },
       {
-        title: "⚙️ Cara Penggunaan",
+        title: "Cara Penggunaan",
         content:
           "1. Buka/jalankan aplikasi Geotagging Photo App.\n2. Tarik foto berekstensi .jpg atau .jpeg Anda ke area kotak pratinjau, atau klik tombol \"Pilih Foto\".\n3. Jika foto sebelumnya sudah memiliki data lokasi, kolom Latitude dan Longitude akan otomatis terisi.\n4. Pilih format koordinat yang ingin Anda gunakan di bagian pengaturan (Desimal atau DMS).\n5. Masukkan atau ubah koordinat latitude dan longitude sesuai kebutuhan.\n6. Centang opsi Gunakan Kompresi Ringan (opsional) jika ingin mengurangi file size.\n7. Klik Simpan Geotag.\n8. Aplikasi akan membuat salinan foto baru pada direktori yang sama dengan tambahan nama _geotagged (contoh: foto_geotagged.jpg). File asli Anda tetap aman dan tidak ditimpa!",
       },
       {
-        title: "🛠️ Persyaratan Instalasi (Bagi Developer)",
+        title: "Persyaratan Instalasi (Bagi Developer)",
         content:
           "Jika Anda ingin menjalankan script secara langsung atau memodifikasi source code-nya, pastikan Anda telah memiliki Python 3.x dan menginstal dependensi (pip install -r requirements.txt). Modul utama yang digunakan antara lain: Pillow, piexif, dan tkinterdnd2.",
       },
       {
-        title: "🤝 Kontribusi",
+        title: "Kontribusi",
         content:
           "Proyek ini sepenuhnya Gratis dan Open-Source. Jika Anda ingin berkontribusi menambahkan fitur baru (seperti integrasi API Maps, bulk process, dsb.), memperbaiki bug, atau melakukan refactoring, silakan Fork repository ini dan kirimkan Pull Request.",
       },

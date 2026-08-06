@@ -3,8 +3,7 @@ import { personal, education } from "../data/portfolio";
 ---
 
 <div class="relative overflow-hidden">
-  <!-- Background glow effect -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- Background glow effect removed -->
   
   <div class="relative text-center py-16 px-4">
     <!-- Tagline -->
@@ -25,13 +24,13 @@ import { personal, education } from "../data/portfolio";
     <!-- Meta badges -->
     <div class="flex flex-wrap justify-center gap-3 text-sm">
       <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#1E1E1E] border border-[#2C2C2E] rounded-full text-[#98989D]">
-        <span>🎓</span> {education.institution} ({education.period})
+        {education.institution} ({education.period})
       </span>
       <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#1E1E1E] border border-[#2C2C2E] rounded-full text-[#98989D]">
-        <span>📊</span> GPA {education.gpa}
+        GPA {education.gpa}
       </span>
       <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#1E1E1E] border border-[#2C2C2E] rounded-full text-[#98989D]">
-        <span>📍</span> {personal.address}
+        {personal.address}
       </span>
     </div>
   </div>

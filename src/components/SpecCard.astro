@@ -7,13 +7,6 @@ interface Props {
 }
 
 const { name, icon, description, delay = 0 } = Astro.props;
-
-const iconMap: Record<string, string> = {
-  plane: "✈️",
-  globe: "🌐",
-  map: "🗺️",
-  waves: "🌊",
-};
 ---
 
 <div
@@ -21,9 +14,6 @@ const iconMap: Record<string, string> = {
   data-aos="fade-up"
   data-aos-delay={delay}
 >
-  <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-    {iconMap[icon] || "📌"}
-  </div>
   <h3 class="font-semibold text-white text-base mb-2">{name}</h3>
   <p class="text-[#98989D] text-sm leading-relaxed">{description}</p>
 </div>

@@ -10,7 +10,7 @@ import { personal, contact } from "../data/portfolio";
   canonicalUrl="https://bintangmaulana.com/product"
 >
   <!-- Navbar -->
-  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 px-8 bg-[#0A0E1A]/80 backdrop-blur-md border-b border-[#1E2D45]">
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 px-8 dark:bg-[#0A0E1A]/80 bg-white/80 backdrop-blur-md border-b dark:border-[#1E2D45] border-black/10">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <a href="/" class="font-display font-bold text-base dark:text-brand-white text-light-heading tracking-tight px-3 py-1.5 border border-brand-border rounded-sm hover:border-brand-blue transition-colors">
         Bintang<span class="text-brand-blue">.</span>
@@ -63,11 +63,11 @@ import { personal, contact } from "../data/portfolio";
         </span>
         <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl dark:text-white text-gray-900 tracking-tight leading-none mb-6">
           Digital Products, <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-[#06B6D4] to-[#2563EB]">
+          <span class="text-[#2563EB]">
             Tools & Specialized Services.
           </span>
         </h1>
-        <p class="font-body text-base sm:text-lg dark:text-gray-300 text-gray-700 leading-relaxed mb-10">
+        <p class="font-body text-base sm:text-lg dark:text-[#A1A1AA] text-[#3F3F46] leading-relaxed mb-10">
           Explore our curated collection of production-ready web applications, automation toolkits, and professional engineering services tailored to accelerate your projects with precision, reliability, and scale.
         </p>
       </div>
@@ -77,16 +77,15 @@ import { personal, contact } from "../data/portfolio";
     </div>
   </section>
 
-  <!-- Consultation Banner Section -->
-  <section class="py-20 px-8 border-t border-[#1E2D45] dark:bg-[#111827]/30 bg-gray-50">
+  <section class="py-20 px-8 border-t dark:border-white/10 border-black/10 dark:bg-[#18181B] bg-gray-50">
     <div class="max-w-4xl mx-auto text-center">
-      <span class="font-mono text-xs text-[#06B6D4] tracking-widest uppercase mb-3 block">
+      <span class="font-mono text-xs dark:text-[#A1A1AA] text-[#3F3F46] tracking-widest uppercase mb-3 block">
         NEED A TAILORED SOLUTION FOR YOUR PROJECT?
       </span>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl dark:text-white text-gray-900 mb-4">
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl dark:text-[#FAFAFA] text-[#09090B] mb-4">
         Let’s Build Something Exceptional Together.
       </h2>
-      <p class="font-body text-sm sm:text-base dark:text-gray-400 text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+      <p class="font-body text-sm sm:text-base dark:text-[#A1A1AA] text-[#3F3F46] mb-8 max-w-2xl mx-auto leading-relaxed">
         Whether you require custom web platforms, automated data processing pipelines, or specialized engineering consulting — get in touch to discuss how we can turn your vision into reality.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
@@ -94,13 +93,13 @@ import { personal, contact } from "../data/portfolio";
           href="https://wa.me/6282135839218?text=Halo%20Bintang,%20saya%20ingin%20berdiskusi%20mengenai%20layanan%20dan%20solusi%20geospasial."
           target="_blank"
           rel="noopener noreferrer"
-          class="font-mono text-xs bg-[#2563EB] hover:bg-[#06B6D4] text-white px-8 py-3.5 transition-colors shadow-lg shadow-[#2563EB]/25"
+          class="font-mono text-xs bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-8 py-3.5 transition-colors rounded-md"
         >
           CHAT ON WHATSAPP →
         </a>
         <a
           href="mailto:bintang1350@gmail.com?subject=Consultation%20Inquiry%20-%20Geospatial%20Services"
-          class="font-mono text-xs border border-[#1E2D45] dark:text-white text-gray-800 hover:border-[#06B6D4] px-8 py-3.5 transition-colors"
+          class="font-mono text-xs border dark:border-white/20 border-black/20 dark:text-white text-[#09090B] dark:hover:bg-white/10 hover:bg-black/5 px-8 py-3.5 transition-colors rounded-md"
         >
           SEND AN EMAIL
         </a>
@@ -108,9 +107,8 @@ import { personal, contact } from "../data/portfolio";
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-[#1E2D45] py-8 px-8 dark:bg-[#0A0E1A] bg-white">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono dark:text-gray-500 text-gray-600">
+  <footer class="border-t dark:border-white/10 border-black/10 py-8 px-8 dark:bg-[#09090B] bg-white">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono dark:text-[#A1A1AA] text-[#3F3F46]">
       <div>
         © {new Date().getFullYear()} Bintang Maulana Magribi. Built with Astro & React.
       </div>

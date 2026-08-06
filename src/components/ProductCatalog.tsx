@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { productsData } from "../data/products";
 import type { ProductItem } from "../data/products";
 
@@ -12,25 +13,43 @@ export default function ProductCatalog() {
     window.open(`https://wa.me/6282135839218?text=${encoded}`, "_blank", "noopener,noreferrer");
   };
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const ParallaxCard = ({ children, index }: { children: React.ReactNode, index: number }) => {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+      target: ref,
+      offset: ["start end", "end start"]
+    });
+    
+    // Add subtle parallax based on column index
+    const y = useTransform(scrollYProgress, [0, 1], [0, index % 2 === 0 ? -40 : -80]);
+
+    return (
+      <motion.div ref={ref} style={{ y }} className="h-full">
+        {children}
+      </motion.div>
+    );
+  };
+
   const renderProductCard = (item: ProductItem, index: number, isPremium: boolean) => (
-    <a
+    <ParallaxCard key={item.id} index={index}>
+      <motion.a
+      variants={cardVariants}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
       key={item.id}
       href={`/product/${item.id}`}
       className="block no-underline h-full product-card-link"
     >
       <div
-        className={`product-card group cursor-pointer border p-6 flex flex-col justify-between h-full relative overflow-hidden ${isPremium
-            ? "border-[#1E2D45] dark:bg-[#111827]/60 bg-white/90 hover:border-[#2563EB] hover:shadow-[0_10px_35px_rgba(37,99,235,0.15)]"
-            : "border-[#06B6D4]/40 dark:bg-[#0A1628]/60 bg-cyan-50/50 hover:border-[#06B6D4] hover:shadow-[0_10px_35px_rgba(6,182,212,0.15)]"
+        className={`product-card group cursor-pointer border p-6 flex flex-col justify-between h-full relative overflow-hidden transition-all duration-300 rounded-xl ${isPremium
+            ? "border-[#E4E4E7] dark:border-white/10 dark:bg-[#18181B] bg-white hover:border-[#2563EB]/50 hover:shadow-lg dark:hover:shadow-blue-500/5 shadow-sm"
+            : "border-[#E4E4E7] dark:border-white/10 dark:bg-[#18181B] bg-white hover:border-[#A1A1AA]/50 hover:shadow-lg dark:hover:shadow-gray-500/5 shadow-sm"
           }`}
       >
-        {/* Top Animated Border Accent */}
-        <div
-          className={`absolute top-0 left-0 right-0 h-[3px] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ${isPremium
-              ? "bg-gradient-to-r from-[#2563EB] via-[#06B6D4] to-transparent"
-              : "bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-transparent"
-            }`}
-        />
 
         <div>
           {/* Tier & Badge */}
@@ -39,9 +58,9 @@ export default function ProductCatalog() {
               {item.category}
             </span>
             <span
-              className={`font-mono text-[10px] px-2.5 py-0.5 border font-bold ${isPremium
-                  ? "border-[#2563EB]/60 text-white bg-[#2563EB]"
-                  : "border-[#10B981]/60 text-emerald-300 bg-emerald-900/60"
+              className={`font-mono text-[10px] px-2.5 py-0.5 border font-semibold rounded-sm ${isPremium
+                  ? "border-[#2563EB]/30 text-[#2563EB] bg-[#2563EB]/10 dark:text-[#60A5FA] dark:bg-[#2563EB]/20"
+                  : "border-gray-500/30 text-gray-600 bg-gray-100 dark:text-gray-300 dark:bg-gray-800"
                 }`}
             >
               {item.badge}
@@ -49,10 +68,10 @@ export default function ProductCatalog() {
           </div>
 
           {/* Title & Tagline */}
-          <h3 className="font-display font-bold text-xl dark:text-white text-gray-900 group-hover:text-[#06B6D4] transition-colors mb-2 leading-tight">
+          <h3 className="font-display font-semibold text-xl dark:text-[#FAFAFA] text-[#09090B] group-hover:text-[#2563EB] transition-colors mb-2 leading-tight">
             {item.title}
           </h3>
-          <p className="font-body text-sm dark:text-gray-400 text-gray-600 mb-4 leading-relaxed line-clamp-2">
+          <p className="font-body text-sm dark:text-[#A1A1AA] text-[#3F3F46] mb-4 leading-relaxed line-clamp-2">
             {item.tagline}
           </p>
         </div>
@@ -63,16 +82,15 @@ export default function ProductCatalog() {
             {item.techStack.map((tech) => (
               <span
                 key={tech}
-                className="font-mono text-[10px] dark:bg-[#1E2D45]/50 bg-gray-100 dark:text-gray-300 text-gray-800 px-2 py-0.5 border border-[#1E2D45]/40"
+                className="font-mono text-[10px] dark:bg-black/40 bg-[#F4F4F5] dark:text-[#D4D4D8] text-[#3F3F46] px-2 py-0.5 border dark:border-white/5 border-black/5 rounded-sm"
               >
                 {tech}
               </span>
             ))}
           </div>
 
-          {/* Action button row */}
-          <div className="flex items-center justify-between border-t border-[#1E2D45]/60 pt-4">
-            <span className="font-mono text-xs text-[#06B6D4] group-hover:underline font-semibold">
+          <div className="flex items-center justify-between border-t dark:border-white/10 border-black/10 pt-4">
+            <span className="font-mono text-xs dark:text-[#D4D4D8] text-[#3F3F46] group-hover:text-[#2563EB] transition-colors font-medium">
               Baca Dokumentasi →
             </span>
             <button
@@ -85,9 +103,9 @@ export default function ProductCatalog() {
                   openWhatsApp(e, item.whatsappMessage);
                 }
               }}
-              className={`font-mono text-xs px-4 py-2 transition-colors font-semibold shadow-md ${isPremium
-                  ? "bg-[#2563EB] hover:bg-[#06B6D4] text-white shadow-[#2563EB]/25"
-                  : "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/25"
+              className={`font-mono text-xs px-4 py-2 transition-all font-semibold rounded-md ${isPremium
+                  ? "bg-[#2563EB] hover:bg-[#1D4ED8] text-white"
+                  : "dark:bg-white dark:text-black dark:hover:bg-gray-200 bg-black text-white hover:bg-gray-800"
                 }`}
             >
               {isPremium ? "INQUIRE / KONSULTASI" : "UNDUH GRATIS →"}
@@ -95,51 +113,74 @@ export default function ProductCatalog() {
           </div>
         </div>
       </div>
-    </a>
+      </motion.a>
+    </ParallaxCard>
   );
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
 
   return (
     <div className="w-full space-y-16">
       {/* SECTION 1: PREMIUM PRODUCTS & SERVICES */}
       <div>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1E2D45] pb-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b dark:border-white/10 border-black/10 pb-4 mb-8">
           <div>
-            <span className="font-mono text-xs text-brand-blue uppercase tracking-widest block mb-1">
+            <span className="font-mono text-xs text-[#2563EB] uppercase tracking-widest block mb-1 font-semibold">
               TIER 1 · ENTERPRISE & PROFESSIONAL
             </span>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl dark:text-white text-gray-900">
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl dark:text-[#FAFAFA] text-[#09090B]">
               Premium Products & Services
             </h2>
           </div>
-          <span className="font-mono text-xs text-[#06B6D4] border border-[#1E2D45] px-3 py-1 self-start sm:self-auto">
+          <span className="font-mono text-xs dark:text-[#A1A1AA] text-[#3F3F46] border dark:border-white/10 border-black/10 px-3 py-1 self-start sm:self-auto rounded-sm">
             {premiumProducts.length} SOLUTIONS
           </span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-2 gap-8"
+        >
           {premiumProducts.map((item, idx) => renderProductCard(item, idx, true))}
-        </div>
+        </motion.div>
       </div>
 
       {/* SECTION 2: FREE TOOLS & APPLICATIONS */}
       <div>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1E2D45] pb-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b dark:border-white/10 border-black/10 pb-4 mb-8">
           <div>
-            <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest block mb-1">
+            <span className="font-mono text-xs dark:text-[#A1A1AA] text-[#3F3F46] uppercase tracking-widest block mb-1 font-semibold">
               TIER 2 · OPEN ACCESS & PORTABLE
             </span>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl dark:text-white text-gray-900">
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl dark:text-[#FAFAFA] text-[#09090B]">
               Free Tools & Applications
             </h2>
           </div>
-          <span className="font-mono text-xs text-emerald-400 border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 self-start sm:self-auto">
-            {freeProducts.length} FREE TOOL
+          <span className="font-mono text-xs dark:text-[#A1A1AA] text-[#3F3F46] border dark:border-white/10 border-black/10 px-3 py-1 self-start sm:self-auto rounded-sm">
+            {freeProducts.length} FREE TOOLS
           </span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-2 gap-8"
+        >
           {freeProducts.map((item, idx) => renderProductCard(item, idx, false))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

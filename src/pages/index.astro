@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ExperienceSection from "../components/ExperienceSection.tsx";
-import { personal, education, stats, specializations, projects, organizations, contact } from "../data/portfolio";
+import SkillBars from "../components/SkillBars.tsx";
+import InteractiveVectorField from "../components/InteractiveVectorField.tsx";
+import { personal, education, stats, specializations, projects, organizations, contact, certifications } from "../data/portfolio";
 ---
 
 <Layout>
@@ -51,7 +53,11 @@ import { personal, education, stats, specializations, projects, organizations, c
   </nav>
 
   <!-- Scroll Progress Bar -->
-  <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-brand-blue to-brand-cyan z-[60] transition-none" style="width: 0%;"></div>
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-brand-blue z-[60] transition-none" style="width: 0%;"></div>
+  <!-- Interactive Vector Field Background (Motion.dev style) applied to the whole site -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none z-[-1]">
+    <InteractiveVectorField client:load />
+  </div>
 
   <!-- Back to Top Button -->
   <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-10 h-10 bg-brand-blue text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-blue/20 opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:bg-brand-cyan" aria-label="Back to top">
@@ -61,17 +67,37 @@ import { personal, education, stats, specializations, projects, organizations, c
   </button>
 
   <!-- ══════════════ HERO ══════════════ -->
-  <section class="relative min-h-screen flex items-center overflow-hidden">
-    <!-- Glow orbs -->
-    <div class="absolute top-10 right-10 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20"
-         style="background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);"></div>
+  <section class="relative min-h-screen flex items-center overflow-hidden bg-transparent">
+    <!-- Minimalist Geomatics-Themed Parallax Decorations -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      <!-- Survey Crosshair -->
+      <div class="absolute top-[15%] right-[20%] flex flex-col items-center justify-center opacity-30" data-parallax="-0.2">
+        <div class="w-px h-8 bg-brand-cyan/40"></div>
+        <div class="flex items-center">
+          <div class="w-8 h-px bg-brand-cyan/40"></div>
+          <div class="w-3 h-3 border border-brand-cyan rounded-full mx-1"></div>
+          <div class="w-8 h-px bg-brand-cyan/40"></div>
+        </div>
+        <div class="w-px h-8 bg-brand-cyan/40"></div>
+        <div class="mt-2 font-mono text-[8px] text-brand-cyan">N 0°0'0" E</div>
+      </div>
+
+      <!-- Bounding Box -->
+      <div class="absolute bottom-[20%] left-[5%] w-32 h-32 border border-brand-border opacity-50" data-parallax="0.3">
+        <div class="absolute -top-1 -left-1 w-2 h-2 bg-brand-blue/30"></div>
+        <div class="absolute -top-1 -right-1 w-2 h-2 bg-brand-blue/30"></div>
+        <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-brand-blue/30"></div>
+        <div class="absolute -bottom-1 -right-1 w-2 h-2 bg-brand-blue/30"></div>
+        <div class="absolute bottom-2 right-2 font-mono text-[8px] dark:text-brand-muted text-light-muted">BOUNDS</div>
+      </div>
+    </div>
 
     <!-- Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-8 w-full py-24">
       <div class="grid lg:grid-cols-[45%_1fr] gap-10 items-start">
         
         <!-- Left: Text -->
-        <div class="hero-stagger pt-8">
+        <div class="hero-stagger pt-8" data-parallax="0.08">
           <!-- Simple label -->
           <div class="flex items-center gap-3 mb-6">
             <span class="w-8 h-px bg-brand-cyan"></span>
@@ -102,13 +128,15 @@ import { personal, education, stats, specializations, projects, organizations, c
         </div>
 
         <!-- Right: Photo -->
-        <div class="relative mt-8" data-tilt>
-          <img src="/Gambar/Foto.jpeg" alt="Bintang Maulana Magribi"
-               loading="eager" decoding="async"
-               class="w-full aspect-[3/2] object-cover photo-glow rounded-sm" />
-          <div class="flex justify-between items-center mt-3 mx-1">
-            <span class="font-mono text-[10px] text-brand-cyan tracking-wider">ITB · 2025</span>
-            <span class="font-mono text-[10px] dark:text-brand-muted text-light-muted italic">"Be the star wherever you are."</span>
+        <div data-parallax="0.15">
+          <div class="relative mt-8" data-tilt>
+            <img src="/Gambar/Foto.jpeg" alt="Bintang Maulana Magribi"
+                 loading="eager" decoding="async"
+                 class="w-full aspect-[3/2] object-cover rounded-md shadow-xl" />
+            <div class="flex justify-between items-center mt-3 mx-1">
+              <span class="font-mono text-[10px] text-brand-cyan tracking-wider">ITB · 2025</span>
+              <span class="font-mono text-[10px] dark:text-brand-muted text-light-muted italic">"Be the star wherever you are."</span>
+            </div>
           </div>
         </div>
       </div>
@@ -117,16 +145,16 @@ import { personal, education, stats, specializations, projects, organizations, c
     <!-- Scroll -->
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
       <span class="font-mono text-[9px] dark:text-brand-muted/30 text-light-muted/50 tracking-[0.3em]">SCROLL</span>
-      <div class="w-px h-8 bg-gradient-to-b from-brand-blue/40 to-transparent"></div>
+      <div class="w-px h-8 dark:bg-white/10 bg-black/10"></div>
     </div>
   </section>
 
   <!-- ══════════════ ABOUT ══════════════ -->
   <section id="about" class="py-28 relative">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px dark:bg-white/5 bg-black/5"></div>
     <div class="max-w-7xl mx-auto px-8">
       <div class="grid lg:grid-cols-5 gap-16 items-start">
-        <div class="lg:col-span-3" data-reveal>
+        <div class="lg:col-span-3" data-reveal data-parallax="0.05">
           <div class="flex items-center gap-3 mb-6">
             <span class="w-8 h-px bg-brand-cyan"></span>
             <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">ABOUT ME</span>
@@ -160,14 +188,14 @@ import { personal, education, stats, specializations, projects, organizations, c
         </div>
 
         <!-- Right: Organizations as Roadmap -->
-        <div class="lg:col-span-2" data-reveal>
+        <div class="lg:col-span-2" data-reveal data-parallax="0.08">
           <div class="font-mono text-[10px] dark:text-brand-muted text-light-muted tracking-[0.2em] mb-8">ORGANIZATIONAL EXPERIENCE</div>
           
           <!-- Timeline roadmap with animation -->
           <div class="relative pl-8">
             <!-- Vertical line (animated grow) -->
             <div class="absolute left-[9px] top-2 bottom-2 w-0.5 rounded-full overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-blue/20 origin-top" 
+              <div class="w-full h-full bg-brand-blue origin-top" 
                    style="animation: growLine 1.5s ease-out 0.5s forwards; transform: scaleY(0);"></div>
             </div>
             
@@ -195,7 +223,7 @@ import { personal, education, stats, specializations, projects, organizations, c
 
   <!-- ══════════════ SKILLS ══════════════ -->
   <section id="skills" class="py-28 relative">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-border to-transparent"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px dark:bg-white/5 bg-black/5"></div>
     <div class="max-w-7xl mx-auto px-8">
       <!-- Specializations -->
       <div class="flex items-center gap-3 mb-4" data-reveal>
@@ -307,8 +335,8 @@ import { personal, education, stats, specializations, projects, organizations, c
           const isEven = i % 2 === 0;
           return (
             <div data-tilt class="skill-card border border-brand-border dark:bg-brand-surface/30 bg-light-surface p-7 hover:border-brand-blue/50 overflow-hidden relative cursor-default">
-              <div class="text-3xl mb-4">
-                {spec.icon === 'plane' ? '✈️' : spec.icon === 'globe' ? '🌐' : spec.icon === 'map' ? '🗺️' : '🌊'}
+              <div class="text-xl mb-4 font-bold text-brand-blue opacity-50 font-mono">
+                {String(i + 1).padStart(2, '0')}
               </div>
               <h3 class="font-display font-semibold text-sm dark:text-brand-white text-light-heading mb-2">{spec.name}</h3>
               <p class="font-body text-xs dark:text-brand-muted text-light-muted leading-relaxed">{spec.description}</p>
@@ -322,7 +350,7 @@ import { personal, education, stats, specializations, projects, organizations, c
 
   <!-- ══════════════ EXPERIENCE ══════════════ -->
   <section id="experience" class="py-28 relative">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-border to-transparent"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px dark:bg-white/5 bg-black/5"></div>
     <div class="max-w-7xl mx-auto px-8">
       <div class="flex items-center gap-3 mb-4" data-reveal>
         <span class="w-8 h-px bg-brand-cyan"></span>
@@ -335,7 +363,7 @@ import { personal, education, stats, specializations, projects, organizations, c
 
   <!-- ══════════════ PROJECTS ══════════════ -->
   <section id="projects" class="py-28 relative">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px dark:bg-white/5 bg-black/5"></div>
     <div class="max-w-7xl mx-auto px-8">
       <div class="flex items-center gap-3 mb-4" data-reveal>
         <span class="w-8 h-px bg-brand-cyan"></span>
@@ -344,7 +372,8 @@ import { personal, education, stats, specializations, projects, organizations, c
       <h2 data-reveal class="font-display font-bold text-3xl dark:text-brand-white text-light-heading mb-12">Featured Projects</h2>
 
       <!-- Featured: Bali Catalyst -->
-      <div data-reveal data-tilt class="grid lg:grid-cols-2 gap-10 items-center mb-16 border border-brand-border dark:bg-brand-surface/20 bg-light-surface p-8 hover:border-brand-blue/30 transition-all">
+      <div data-parallax="0.05">
+        <div data-reveal data-tilt class="grid lg:grid-cols-2 gap-10 items-center mb-16 border border-brand-border dark:bg-brand-surface/20 bg-light-surface p-8 hover:border-brand-blue/30 transition-all">
         <div>
           <span class="font-mono text-[10px] text-brand-blue tracking-wider">01 — FEATURED</span>
           <h3 class="font-display font-bold text-2xl dark:text-brand-white text-light-heading mt-2 mb-3 leading-tight">
@@ -380,6 +409,7 @@ import { personal, education, stats, specializations, projects, organizations, c
           </div>
         </div>
       </div>
+    </div>
 
       <!-- Other projects -->
       <div data-reveal class="space-y-3">
@@ -409,12 +439,16 @@ import { personal, education, stats, specializations, projects, organizations, c
 
   <!-- ══════════════ CONTACT ══════════════ -->
   <section id="contact" class="py-32 relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent"></div>
-    <!-- Subtle glow -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full opacity-10 pointer-events-none"
-         style="background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);"></div>
-
-    <div class="relative max-w-3xl mx-auto px-8 text-center" style="z-index:2;">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px dark:bg-white/5 bg-black/5"></div>
+    
+    <!-- Decorative Parallax Elements for Contact -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-[30%] left-[15%] font-mono text-[10px] text-brand-cyan/20 rotate-90" data-parallax="-0.15">
+        SYS.REQ.AWAITING
+      </div>
+      <div class="absolute bottom-[20%] right-[10%] w-48 h-48 border border-brand-blue/10 rounded-full" data-parallax="0.25"></div>
+    </div>
+    <div class="relative max-w-3xl mx-auto px-8 text-center" style="z-index:2;" data-parallax="0.06">
       <div data-reveal class="flex items-center gap-3 justify-center mb-6">
         <span class="w-6 h-px bg-brand-cyan"></span>
         <span class="font-mono text-[11px] text-brand-cyan tracking-[0.2em]">READY TO COLLABORATE?</span>
@@ -422,7 +456,7 @@ import { personal, education, stats, specializations, projects, organizations, c
       </div>
 
       <h2 data-reveal class="font-display font-black text-[clamp(2.5rem,6vw,5rem)] dark:text-brand-white text-light-heading leading-[0.95] mb-12">
-        GET IN <span class="gradient-text">TOUCH</span>
+        GET IN <span class="text-brand-blue">TOUCH</span>
       </h2>
 
       <!-- Big email CTA -->
@@ -494,6 +528,18 @@ import { personal, education, stats, specializations, projects, organizations, c
         progressBar.style.width = ((scrollY / docHeight()) * 100) + '%';
       }
 
+      // Parallax Motion
+      document.querySelectorAll('[data-parallax]').forEach(el => {
+        const speed = parseFloat((el as HTMLElement).getAttribute('data-parallax') || '0.1');
+        const rect = el.getBoundingClientRect();
+        // Calculate distance from center of viewport
+        const centerOffset = (rect.top + rect.height / 2) - (window.innerHeight / 2);
+        const yPos = centerOffset * speed;
+        // Don't overwrite existing transforms completely if we can avoid it, 
+        // but here we know these elements only have parallax.
+        (el as HTMLElement).style.transform = `translateY(${yPos}px)`;
+      });
+
       // Back to top
       if (backToTop) {
         if (scrollY > 500) {
@@ -536,12 +582,11 @@ import { personal, education, stats, specializations, projects, organizations, c
       } else {
         setTimeout(() => {
           if (cursor) cursor.style.display = 'none';
-          if (typed) typed.classList.add('shimmer-text');
         }, 500);
       }
     }
     function formatName(text: string) {
-      return text.replace('MAULANA', '<span class="gradient-text">MAULANA</span>');
+      return text.replace('MAULANA', '<span class="text-brand-blue">MAULANA</span>');
     }
     setTimeout(typeChar, 500);
 

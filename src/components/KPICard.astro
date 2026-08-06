@@ -30,11 +30,6 @@ const accentColors = {
 
 const colors = accentColors[accent];
 
-const iconMap: Record<string, string> = {
-  zap: "⚡",
-  "map-pin": "📍",
-  satellite: "🛰️",
-};
 ---
 
 <div
@@ -43,8 +38,8 @@ const iconMap: Record<string, string> = {
   data-aos="fade-up"
   data-aos-delay={delay}
 >
-  <div class={`w-12 h-12 rounded-full ${colors.iconBg} flex items-center justify-center text-2xl mb-4`}>
-    {iconMap[icon] || "⚡"}
+  <div class={`w-12 h-12 rounded-full ${colors.iconBg} flex items-center justify-center text-xs font-mono mb-4 text-white`}>
+    KPI
   </div>
   <div class={`font-mono text-4xl font-bold ${colors.text} mb-2`}>
     {value}<span class="text-xl opacity-70">{unit}</span>

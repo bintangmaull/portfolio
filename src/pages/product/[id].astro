@@ -18,7 +18,7 @@ const { product } = Astro.props;
   canonicalUrl={`https://bintangmaulana.my.id/product/${product.id}`}
 >
   <!-- Navbar -->
-  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 px-8 bg-[#0A0E1A]/80 backdrop-blur-md border-b border-[#1E2D45]">
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 px-8 dark:bg-[#0A0E1A]/80 bg-white/80 backdrop-blur-md border-b dark:border-[#1E2D45] border-black/10">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <a href="/" class="font-display font-bold text-base dark:text-brand-white text-light-heading tracking-tight px-3 py-1.5 border border-brand-border rounded-sm hover:border-brand-blue transition-colors">
         Bintang<span class="text-brand-blue">.</span>
@@ -41,7 +41,7 @@ const { product } = Astro.props;
   </nav>
 
   <!-- Article Hero -->
-  <section class="relative pt-36 pb-12 px-8 border-b border-[#1E2D45]">
+  <section class="relative pt-36 pb-12 px-8 border-b dark:border-[#1E2D45] border-black/10">
     <div class="max-w-4xl mx-auto">
       <!-- Breadcrumb -->
       <div class="flex items-center gap-2 font-mono text-xs text-[#06B6D4] mb-6">
@@ -59,10 +59,10 @@ const { product } = Astro.props;
         </span>
         <span class="text-gray-600">·</span>
         <span
-          class={`font-mono text-xs px-3 py-1 font-bold ${
+        class={`font-mono text-xs px-3 py-1 font-semibold rounded-sm ${
             product.tier === "premium"
-              ? "bg-[#2563EB] text-white"
-              : "bg-emerald-600 text-white"
+              ? "bg-[#2563EB]/10 text-[#60A5FA]"
+              : "bg-gray-800 text-gray-300"
           }`}
         >
           {product.badge}
@@ -72,7 +72,7 @@ const { product } = Astro.props;
       <h1 class="font-display font-extrabold text-4xl sm:text-5xl dark:text-white text-gray-900 tracking-tight leading-tight mb-4">
         {product.title}
       </h1>
-      <p class="font-body text-lg font-semibold text-[#06B6D4] mb-6">
+      <p class="font-body text-lg font-medium text-[#2563EB] mb-6">
         {product.tagline}
       </p>
       <p class="font-body text-base dark:text-gray-300 text-gray-700 leading-relaxed mb-8">
@@ -90,26 +90,26 @@ const { product } = Astro.props;
       </div>
       <!-- Product Image -->
       {product.imageUrl && (
-        <div class="mb-10 w-full max-w-3xl mx-auto overflow-hidden border border-[#1E2D45]/40 shadow-xl rounded-lg dark:bg-[#050810] bg-gray-50 flex justify-center p-2">
+        <div class="mb-10 w-full max-w-3xl mx-auto overflow-hidden border dark:border-white/5 border-black/5 rounded-xl dark:bg-[#18181B] bg-white shadow-sm flex justify-center p-2">
           <img 
             src={product.imageUrl} 
             alt={`${product.title} App Screenshot`} 
-            class="max-w-full max-h-[450px] w-auto h-auto object-contain rounded" 
+            class="max-w-full max-h-[450px] w-auto h-auto object-contain rounded-lg" 
           />
         </div>
       )}
 
       <!-- Action Buttons in Hero -->
       {(product.downloadUrl || product.githubUrl) && (
-        <div class="flex flex-wrap gap-4 pt-4 border-t border-[#1E2D45]/60">
+        <div class="flex flex-wrap gap-4 pt-4 border-t dark:border-[#1E2D45]/60 border-black/10">
           {product.downloadUrl && (
             <a
               href={product.downloadUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all shadow-lg shadow-emerald-600/20 flex items-center gap-2"
+              class="font-mono text-xs px-6 py-3.5 dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-200 hover:bg-gray-800 font-semibold transition-all rounded-md flex items-center gap-2"
             >
-              <span>📥 UNDUH APLIKASI (GOOGLE DRIVE)</span>
+              <span>UNDUH APLIKASI (GOOGLE DRIVE)</span>
               <span>↗</span>
             </a>
           )}
@@ -118,9 +118,9 @@ const { product } = Astro.props;
               href={product.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs px-6 py-3.5 border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white font-bold transition-all flex items-center gap-2"
+              class="font-mono text-xs px-6 py-3.5 border dark:border-white/20 border-black/20 dark:text-white text-black dark:hover:bg-white/10 hover:bg-black/5 font-semibold transition-all rounded-md flex items-center gap-2"
             >
-              <span>⭐ REPOSITORY GITHUB</span>
+              <span>REPOSITORY GITHUB</span>
               <span>↗</span>
             </a>
           )}
@@ -133,8 +133,8 @@ const { product } = Astro.props;
   <section class="py-16 px-8">
     <div class="max-w-4xl mx-auto space-y-12">
       {product.articleSections.map((sec, index) => (
-        <div class="border border-[#1E2D45]/80 dark:bg-[#111827]/40 bg-white p-8 shadow-sm">
-          <h2 class="font-display font-bold text-2xl dark:text-white text-gray-900 mb-4 border-b border-[#1E2D45]/60 pb-3">
+        <div class="border dark:border-white/10 border-black/10 dark:bg-[#18181B] bg-white p-8 rounded-xl shadow-sm">
+          <h2 class="font-display font-semibold text-2xl dark:text-[#FAFAFA] text-[#09090B] mb-4 border-b dark:border-white/10 border-black/10 pb-3">
             {sec.title}
           </h2>
 
@@ -147,8 +147,8 @@ const { product } = Astro.props;
           {sec.items && (
             <ul class="space-y-5">
               {sec.items.map((item) => (
-                <li class="pl-4 border-l border-[#06B6D4]/40">
-                  <h3 class="font-display font-bold text-base dark:text-[#06B6D4] text-blue-700 mb-1">
+                <li class="pl-4 border-l dark:border-white/10 border-black/10">
+                  <h3 class="font-display font-semibold text-base dark:text-white text-black mb-1">
                     {item.subtitle}
                   </h3>
                   <p class="font-body text-sm dark:text-gray-300 text-gray-700 leading-relaxed">
@@ -163,11 +163,10 @@ const { product } = Astro.props;
     </div>
   </section>
 
-  <!-- Bottom CTA Block -->
-  <section class="py-16 px-8 border-t border-[#1E2D45] dark:bg-[#111827]/30 bg-gray-50">
+  <section class="py-16 px-8 border-t dark:border-white/10 border-black/10 dark:bg-[#18181B] bg-gray-50">
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
       <div>
-        <h3 class="font-display font-bold text-2xl dark:text-white text-gray-900 mb-1">
+        <h3 class="font-display font-semibold text-2xl dark:text-[#FAFAFA] text-[#09090B] mb-1">
           Tertarik dengan {product.title}?
         </h3>
         <p class="font-body text-sm dark:text-gray-400 text-gray-600">
@@ -183,18 +182,18 @@ const { product } = Astro.props;
               href={product.downloadUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-lg shadow-emerald-600/25 transition-colors"
+              class="font-mono text-xs px-6 py-3.5 dark:bg-white bg-black dark:hover:bg-gray-200 hover:bg-gray-800 dark:text-black text-white font-semibold transition-colors rounded-md"
             >
-              📥 UNDUH VIA GOOGLE DRIVE →
+              UNDUH VIA GOOGLE DRIVE →
             </a>
             {product.githubUrl && (
               <a
                 href={product.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="font-mono text-xs px-6 py-3.5 border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white font-semibold transition-colors"
+                class="font-mono text-xs px-6 py-3.5 border dark:border-white/20 border-black/20 dark:text-white text-black dark:hover:bg-white/10 hover:bg-black/5 font-semibold transition-colors rounded-md"
               >
-                ⭐ GITHUB REPO →
+                GITHUB REPO →
               </a>
             )}
           </>
@@ -203,14 +202,14 @@ const { product } = Astro.props;
             href={`https://wa.me/6282135839218?text=${encodeURIComponent(product.whatsappMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="font-mono text-xs px-6 py-3.5 bg-[#2563EB] hover:bg-[#06B6D4] text-white font-semibold shadow-lg shadow-[#2563EB]/25 transition-colors"
+            class="font-mono text-xs px-6 py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold transition-colors rounded-md"
           >
             HUBUNGI / KONSULTASI VIA WHATSAPP →
           </a>
         )}
         <a
           href="/product"
-          class="font-mono text-xs border border-[#1E2D45] dark:text-white text-gray-800 hover:border-[#06B6D4] px-6 py-3.5 transition-colors"
+          class="font-mono text-xs border dark:border-white/20 border-black/20 dark:text-white text-gray-800 dark:hover:bg-white/10 hover:bg-black/5 px-6 py-3.5 transition-colors rounded-md"
         >
           ← KEMBALI
         </a>
@@ -218,9 +217,8 @@ const { product } = Astro.props;
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-[#1E2D45] py-8 px-8 dark:bg-[#0A0E1A] bg-white">
-    <div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-mono dark:text-gray-500 text-gray-600">
+  <footer class="border-t dark:border-white/10 border-black/10 py-8 px-8 dark:bg-[#09090B] bg-white">
+    <div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-mono dark:text-[#A1A1AA] text-gray-600">
       <div>© {new Date().getFullYear()} Bintang Maulana Magribi.</div>
       <a href="/product" class="hover:text-[#06B6D4]">Back to Products Catalog</a>
     </div>
